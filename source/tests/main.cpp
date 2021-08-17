@@ -84,30 +84,30 @@ int main( void )
     //         EXPECT_EQ( *it, *it2 );
     // }
 
-    // {
-    //     BEGIN_TEST(tm, "CopyConstructor","constructor copy values of another list.");
-    //     // Range = the entire list.
-    //     which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> list2( list );
+    {
+        BEGIN_TEST(tm, "CopyConstructor","constructor copy values of another list.");
+        // Range = the entire list.
+        which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+        which_lib::list<int> list2( list );
 
-    //     EXPECT_EQ( list2.size(), 5 );
-    //     EXPECT_FALSE( list2.empty() );
+        EXPECT_EQ( list2.size(), 5 );
+        EXPECT_FALSE( list2.empty() );
 
-    //     // recover elements to test.
+        // recover elements to test.
 
-    //     auto i{1};
-    //     for( auto e : list2 )
-    //         EXPECT_EQ( e, i++ );
+        auto i{1};
+        for( auto e : list2 )
+            EXPECT_EQ( e, i++ );
 
-    //     // Changing seq (the original)...
-    //     auto it = std::next( list.begin(), 2 );
-    //     *it = 10;
-    //     // ... should not alter the copy.
-    //     i = 1;
-    //     for( auto e : list2 )
-    //         EXPECT_EQ( e, i++ );
-    // }
-//#ifd// ef MOVE_SYNTAX_IMPLEMENTED
+        // Changing seq (the original)...
+        auto it = std::next( list.begin(), 2 );
+        *it = 10;
+        // ... should not alter the copy.
+        i = 1;
+        for( auto e : list2 )
+            EXPECT_EQ( e, i++ );
+    }
+//#ifdef MOVE_SYNTAX_IMPLEMENTED
 
     // // {
     // //     BEGIN_TEST(tm, "Molistonstructor", "move the elements from another");
