@@ -2,8 +2,8 @@
 
 Preencha os dados abaixo para identificar a autoria do trabalho.
 
-- Nome: *<insira seu nome aqui>*
-- Email: *<insira seu email aqui>*
+- Nome: *José Davi Viana Francelino*
+- Email: *jose.davi@imd.ufrn.br*
 - Turma: *<insira sua turma aqui>*
 
 # Indique quais métodos das classes abaixo foram implementados
@@ -14,15 +14,15 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 - [ ] Regular constructor (3 credits)
 - [ ] Constructor size (3 credits)
 - [ ] Destructor (3 credits)
-- [ ] Copy constructor (3 credits)
+- [X] Copy constructor (3 credits)
 - [ ] Constructor from range (3 credits)
-- [ ] Constructor from initialize list (2 credits)
+- [X] Constructor from initialize list (2 credits)
 - [ ] Assignment operator `operator=(list)` (2 credits)
 - [ ] Assignment operator `operator=(initializer list)` (2 credits)
 
 **Iterator methods (4 credits)**
-- [ ] `begin()` (1 credits)
-- [ ] `end()` (1 credits)
+- [X] `begin()` (1 credits)
+- [X] `end()` (1 credits)
 - [ ] `cbegin()` (1 credits)
 - [ ] `cend()` (1 credits)
 
@@ -62,14 +62,14 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 ## Implementação do Iterator
 
 **Special members (3 credits)**
-- [ ] Regular constructor (1 credits)
+- [X] Regular constructor (1 credits)
 - [ ] Copy constructor (1 credits)
 - [ ] Assignment operator (1 credits)
 
 **Navigation methods (7 credits)**
 - [ ] increment operator `++it` and `it++` (2 credits)
 - [ ] decrement operator `--it` and `it--` (2 credits)
-- [ ] dereference operator `*it` (1 credits)
+- [X] dereference operator `*it` (1 credits)
 - [ ] equality/difference operators `it1==it2` and `it1!=it2` (2 credits)
 
 --------

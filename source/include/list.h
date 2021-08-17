@@ -60,14 +60,29 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 Node * m_ptr; //!< The raw pointer.
 
             public:
-                const_iterator( Node * ptr = nullptr ){/*TODO*/}
+                const_iterator( Node * ptr = nullptr ) : m_ptr {ptr} {}
                 ~const_iterator() = default;
                 const_iterator( const const_iterator & ) = default;
                 const_iterator& operator=( const const_iterator & ) = default;
-                reference  operator*() { /* TODO */ return m_ptr->data; }
-                const_reference  operator*() const { /* TODO */ return nullptr; }
-                const_iterator operator++() { /* TODO */ return const_iterator{}; }
-                const_iterator operator++(int) { /* TODO */ return const_iterator{}; }
+                reference operator*() {
+                    return m_ptr->data;
+                }
+                const_reference operator*() const {
+                    return m_ptr->data;
+                }
+                const_iterator operator++() {
+                    if (m_ptr == nullptr)
+                        throw std::length_error("operator++(): iterator already in end of list");
+                    m_ptr = m_ptr->next;
+                    return *this;
+                }
+                const_iterator operator++(int) {
+                    if (m_ptr == nullptr)
+                        throw std::length_error("operator++(): iterator already in end of list");
+                    auto old {m_ptr};
+                    m_ptr = m_ptr->next;
+                    return const_iterator{old};
+                }
                 const_iterator operator--() { /* TODO */ return const_iterator{}; }
                 const_iterator operator--(int) { /* TODO */ return const_iterator{}; }
                 bool operator==( const const_iterator & rhs ) const { /* TODO */ return false; }
@@ -109,14 +124,29 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 Node * m_ptr; //!< The raw pointer.
 
             public:
-                iterator( Node * ptr = nullptr ){/*TODO*/}
+                iterator( Node * ptr = nullptr ) : m_ptr {ptr} {}
                 ~iterator() = default;
                 iterator( const iterator & ) = default;
                 iterator& operator=( const iterator & ) = default;
-                reference  operator*() { /* TODO */ return m_ptr->data; }
-                const_reference  operator*() const { /* TODO */ return nullptr; }
-                iterator operator++() { /* TODO */ return iterator{}; }
-                iterator operator++(int) { /* TODO */ return iterator{}; }
+                reference  operator*() {
+                    return m_ptr->data;
+                }
+                const_reference operator*() const {
+                    return m_ptr->data;
+                }
+                iterator operator++() {
+                    if (m_ptr == nullptr)
+                        throw std::length_error("operator++(): iterator already in end of list");
+                    m_ptr = m_ptr->next;
+                    return *this;
+                }
+                iterator operator++(int) {
+                    if (m_ptr == nullptr)
+                        throw std::length_error("operator++(): iterator already in end of list");
+                    auto old {m_ptr};
+                    m_ptr = m_ptr->next;
+                    return iterator{old};
+                }
                 iterator operator--() { /* TODO */ return iterator{}; }
                 iterator operator--(int) { /* TODO */ return iterator{}; }
                 bool operator==( const iterator & rhs ) const { /* TODO */ return false; }
@@ -153,8 +183,7 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         //=== Public interface
 
         //=== [I] Special members
-        list()
-        { 
+        list() { 
             /*  Head & tail nodes.
              *     +---+    +---+
              *     |   |--->|   |--+
@@ -170,15 +199,32 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         explicit list( size_t count ) { /* TODO */ }
         template< typename InputIt >
         list( InputIt first, InputIt last ) { /* TODO */ }
-        list( const list & clone_ ) { /* TODO */ }
-        list( std::initializer_list<T> ilist_ ) { /* TODO */ }
+        list( const list & clone ) : m_len{clone.m_len}, m_head{clone.m_head}, m_tail{clone.m_tail} {}
+        list( std::initializer_list<T> ilist ) { 
+            m_head = new Node;
+            m_tail = new Node;
+            m_len = 0;
+            auto prev {&m_head};
+            for (auto it {ilist.begin()}; it != ilist.end(); it++) {
+                auto curr {new Node{*it}};
+                (*prev)->next = curr;
+                curr->prev = *prev;
+                prev = &curr;
+                m_len++;
+            }
+            m_tail->prev = *prev;
+        }
         ~list() { /* TODO */ }
         list & operator=( const list & rhs ) { /* TODO */ return *this;}
         list & operator=( std::initializer_list<T> ilist_ ) { /* TODO */ return *this;}
         //=== [II] ITERATORS
-        iterator begin() { /* TODO */ return iterator{}; }
+        iterator begin() {
+            return iterator{m_head->next};
+        }
         const_iterator cbegin() const  { /* TODO */ return const_iterator{}; }
-        iterator end() { /* TODO */ return iterator{}; }
+        iterator end() {
+            return iterator{m_tail->prev};
+        }
         const_iterator cend() const  { /* TODO */ return const_iterator{}; }
         //=== [III] Capacity/Status
         bool empty ( void ) const { /* TODO */  return true; }
