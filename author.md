@@ -43,7 +43,7 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 
 **Operator overloading (4 credits)**
 - [ ] `operator==()` (2 credits)
-- [ ] `operator!=()` (2 credits)
+- [X] `operator!=()` (2 credits)
 
 **Methods that require iterators (19 credits)**
 - [ ] `insert(iterator,value)` (4 credits)
@@ -67,7 +67,7 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 - [ ] Assignment operator (1 credits)
 
 **Navigation methods (7 credits)**
-- [ ] increment operator `++it` and `it++` (2 credits)
+- [X] increment operator `++it` and `it++` (2 credits)
 - [ ] decrement operator `--it` and `it--` (2 credits)
 - [X] dereference operator `*it` (1 credits)
 - [ ] equality/difference operators `it1==it2` and `it1!=it2` (2 credits)

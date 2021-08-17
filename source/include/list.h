@@ -86,7 +86,9 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 const_iterator operator--() { /* TODO */ return const_iterator{}; }
                 const_iterator operator--(int) { /* TODO */ return const_iterator{}; }
                 bool operator==( const const_iterator & rhs ) const { /* TODO */ return false; }
-                bool operator!=( const const_iterator & rhs ) const { /* TODO */ return false; }
+                bool operator!=( const const_iterator & rhs ) const { 
+                    return m_ptr != rhs.m_ptr;
+                }
 
                 //=== Other methods that you might want to implement.
                 /// it += 3; // Go back  3 positions within the container. 
@@ -150,7 +152,9 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 iterator operator--() { /* TODO */ return iterator{}; }
                 iterator operator--(int) { /* TODO */ return iterator{}; }
                 bool operator==( const iterator & rhs ) const { /* TODO */ return false; }
-                bool operator!=( const iterator & rhs ) const { /* TODO */ return false; }
+                bool operator!=( const iterator & rhs ) const { 
+                    return m_ptr != rhs.m_ptr;
+                }
 
                 //=== Other methods that you might want to implement.
                 /// it += 3; // Go back  3 positions within the container. 
@@ -161,6 +165,14 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 pointer operator->( void ) const { /* TODO */ return nullptr; }
                 /// it1 - it2
                 difference_type operator-( const iterator & rhs ) const { /* TODO */ return 0; }
+
+                // friend iterator operator+(iterator it, int n) {
+                //     auto new_it {it};
+                //     for (auto i {0}; i < n; i++) {
+                //         new_it++;
+                //     }
+                //     return new_it;
+                // }
 
                 // We need friendship so the list<T> class may access the m_ptr field.
                 friend class list<T>;
@@ -204,15 +216,16 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             m_head = new Node;
             m_tail = new Node;
             m_len = 0;
-            auto prev {&m_head};
+            auto prev {m_head};
             for (auto it {ilist.begin()}; it != ilist.end(); it++) {
                 auto curr {new Node{*it}};
-                (*prev)->next = curr;
-                curr->prev = *prev;
-                prev = &curr;
+                prev->next = curr;
+                curr->prev = prev;
+                prev = curr;
                 m_len++;
             }
-            m_tail->prev = *prev;
+            prev->next = m_tail;
+            m_tail->prev = prev;
         }
         ~list() { /* TODO */ }
         list & operator=( const list & rhs ) { /* TODO */ return *this;}
@@ -223,7 +236,7 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         }
         const_iterator cbegin() const  { /* TODO */ return const_iterator{}; }
         iterator end() {
-            return iterator{m_tail->prev};
+            return iterator{m_tail};
         }
         const_iterator cend() const  { /* TODO */ return const_iterator{}; }
         //=== [III] Capacity/Status

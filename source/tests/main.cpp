@@ -13,13 +13,14 @@
 // ============================================================================
 //
 template < typename T>
-std::ostream & operator<<( std::ostream &os, const which_lib::list<T> & L )
+std::ostream & operator<<( std::ostream &os, which_lib::list<T> & L )
 {
-    os << "[ ";
-    auto it{ L.cbegin() };
-    while ( it != L.cend() )
-        os << *it++ << " ";
-    os << "]";
+    std::cout << "[ " << std::flush;
+
+    auto it{ L.begin() };
+    while ( it != L.end() )
+        std::cout << *it++ << " " << std::flush;
+    std::cout << "]";
     return os;
 }
 
@@ -602,7 +603,6 @@ int main( void )
 
         which_lib::list<int> list { 1, 2, 4, 5, 6 };
         which_lib::list<int>::iterator it = list.begin();
-        std::cout << *it;
         EXPECT_EQ( 1, *it );
 
         auto list2 = list;
@@ -642,7 +642,9 @@ int main( void )
     {
         BEGIN_TEST(tm2, "end","list.end()");
 
+        std::cout << "\n\n\nstart:\n";
         which_lib::list<int> list { 1, 2, 4, 5, 6 };
+        std::cout << list << '\n';
         which_lib::list<int>::iterator it = std::next( list.begin(), 5 );
         EXPECT_EQ( it, list.end() );
 
