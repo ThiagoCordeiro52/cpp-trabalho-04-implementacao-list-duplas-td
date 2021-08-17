@@ -83,9 +83,22 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                     m_ptr = m_ptr->next;
                     return const_iterator{old};
                 }
-                const_iterator operator--() { /* TODO */ return const_iterator{}; }
-                const_iterator operator--(int) { /* TODO */ return const_iterator{}; }
-                bool operator==( const const_iterator & rhs ) const { /* TODO */ return false; }
+                const_iterator operator--() {
+                    if (m_ptr == nullptr)
+                        throw std::length_error("operator--(): iterator already in begin of list");
+                    m_ptr = m_ptr->prev;
+                    return *this; 
+                }
+                const_iterator operator--(int) {
+                    if (m_ptr == nullptr)
+                        throw std::length_error("operator--(): iterator already in begin of list");
+                    auto old {m_ptr}
+                    m_ptr = m_ptr->prev;
+                    return const_iterator{old}; 
+                }
+                bool operator==( const const_iterator & rhs ) const {  
+                    return m_ptr == rhs.m_ptr; 
+                }
                 bool operator!=( const const_iterator & rhs ) const { 
                     return m_ptr != rhs.m_ptr;
                 }
