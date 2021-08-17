@@ -92,7 +92,7 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 const_iterator operator--(int) {
                     if (m_ptr == nullptr)
                         throw std::length_error("operator--(): iterator already in begin of list");
-                    auto old {m_ptr}
+                    auto old {m_ptr};
                     m_ptr = m_ptr->prev;
                     return const_iterator{old}; 
                 }
@@ -105,7 +105,9 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
 
                 //=== Other methods that you might want to implement.
                 /// it += 3; // Go back  3 positions within the container. 
-                const_iterator operator+=( difference_type step) { /* TODO */ return const_iterator{}; }
+                const_iterator operator+=( difference_type step) {  
+                    return const_iterator{}; 
+                }
                 /// it -= 3; // Go back  3 positions within the container. 
                 const_iterator operator-=(  difference_type step ) { /* TODO */ return const_iterator{}; }
                 /// it->method()
@@ -162,9 +164,22 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                     m_ptr = m_ptr->next;
                     return iterator{old};
                 }
-                iterator operator--() { /* TODO */ return iterator{}; }
-                iterator operator--(int) { /* TODO */ return iterator{}; }
-                bool operator==( const iterator & rhs ) const { /* TODO */ return false; }
+                iterator operator--() { 
+                    if (m_ptr == nullptr)
+                        throw std::length_error("operator--(): iterator already in begin of list");
+                    m_ptr = m_ptr->prev;
+                    return *this; 
+                 }
+                iterator operator--(int) {
+                    if (m_ptr == nullptr)
+                        throw std::length_error("operator--(): iterator already in begin of list");
+                    auto old {m_ptr};
+                    m_ptr = m_ptr->prev; 
+                    return iterator{old}; 
+                }
+                bool operator==( const iterator & rhs ) const { 
+                    return m_ptr == rhs.m_ptr;
+                 }
                 bool operator!=( const iterator & rhs ) const { 
                     return m_ptr != rhs.m_ptr;
                 }
