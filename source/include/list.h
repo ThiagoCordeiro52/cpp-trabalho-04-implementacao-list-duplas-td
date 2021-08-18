@@ -469,8 +469,16 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
 
     template < typename T >
     inline bool operator!=( const sc::list<T> & l1, const sc::list<T> & l2 ) {
-        /* TODO */
-        return true;
+        if (l1.size() != l2.size())
+            return true;  
+        bool oneCase{ false };
+        auto it1 {l1.cbegin()};
+        auto it2 {l2.cbegin()};
+        while (it1 != l1.cend() && it2 != l2.cend()) {
+            if (*it1++ != *it2++)
+                oneCase = true;
+        }
+        return oneCase;
     }
 }
 #endif
