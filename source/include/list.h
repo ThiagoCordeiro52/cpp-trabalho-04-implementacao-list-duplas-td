@@ -266,7 +266,13 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             m_len = ilist.size();
         }
         ~list() { /* TODO */ }
-        list & operator=( const list & rhs ) { /* TODO */ return *this;}
+        list & operator=( const list & rhs ) {
+            clear();
+            m_len = rhs.m_len;
+            m_head = rhs.m_head;
+            m_tail = rhs.m_tail;
+            return *this;
+        }
         list & operator=( std::initializer_list<T> ilist_ ) { /* TODO */ return *this;}
         //=== [II] ITERATORS
         iterator begin() {
@@ -279,7 +285,9 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         const_iterator cend() const  { /* TODO */ return const_iterator{}; }
         //=== [III] Capacity/Status
         bool empty ( void ) const { /* TODO */  return true; }
-        size_t size(void) const { /* TODO */  return 0; }
+        size_t size(void) const {
+            return m_len;
+        }
         //=== [IV] Modifiers
         void clear()  { /* TODO */ }
         T front( void ) { /* TODO */ return T{}; }

@@ -12,12 +12,12 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 
 **Special members (20 credits)**
 - [ ] Regular constructor (3 credits)
-- [ ] Constructor size (3 credits)
+- [X] Constructor size (3 credits)
 - [ ] Destructor (3 credits)
 - [X] Copy constructor (3 credits)
 - [ ] Constructor from range (3 credits)
 - [X] Constructor from initialize list (2 credits)
-- [ ] Assignment operator `operator=(list)` (2 credits)
+- [X] Assignment operator `operator=(list)` (2 credits)
 - [ ] Assignment operator `operator=(initializer list)` (2 credits)
 
 **Iterator methods (4 credits)**
@@ -28,7 +28,7 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 
 **Access operations (6 credits)**
 - [ ] `empty()` (1 credits);
-- [ ] `size()` (1 credits);
+- [X] `size()` (1 credits);
 - [ ] `front()` (2 credits);
 - [ ] `back()` (2 credits);
 

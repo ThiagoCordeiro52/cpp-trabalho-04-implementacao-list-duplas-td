@@ -162,19 +162,19 @@ int main( void )
 //#endif
 
 
-    // {
-    //     BEGIN_TEST(tm, "ListInitializerAssign","initializer list assignment");
-    //     // Range = the entire list.
-    //     which_lib::list<int> list = { 1, 2, 3, 4, 5 };
+    {
+        BEGIN_TEST(tm, "ListInitializerAssign","initializer list assignment");
+        // Range = the entire list.
+        which_lib::list<int> list = { 1, 2, 3, 4, 5 };
 
-    //     EXPECT_EQ( list.size(), 5 );
-    //     EXPECT_FALSE( list.empty() );
+        EXPECT_EQ( list.size(), 5 );
+        EXPECT_FALSE( list.empty() );
 
-    //     // recover elements to test.
-    //     auto i{1};
-    //     for( auto e : list )
-    //         EXPECT_EQ ( e, i++ );
-    // }
+        // recover elements to test.
+        auto i{1};
+        for( auto e : list )
+            EXPECT_EQ ( e, i++ );
+    }
 
 
     // {
