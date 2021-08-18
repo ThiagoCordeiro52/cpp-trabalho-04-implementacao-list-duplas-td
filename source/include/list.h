@@ -447,7 +447,23 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             m_len += other.m_len;
             other.m_len = 0;
         }
-        void splice( const_iterator pos, list & other ){ return; }
+        void splice( const_iterator pos, list & other ) {
+            // Goes through other list
+            while (not other.empty()) {
+                auto curr {other.m_head->next};
+                // Remove curr value of other list
+                other.m_head->next = curr->next;
+                curr->next->prev  = other.m_head;
+
+                // Adds curr value to this list
+                curr->prev       = pos.m_ptr->prev;
+                curr->prev->next = curr;
+                curr->next       = pos.m_ptr;
+                curr->next->prev = curr;
+            }
+            m_len += other.m_len;
+            other.m_len = 0;
+        }
         void reverse( void ){ return; }
         void unique( void ){ return; }
         void sort( void ){ return; }

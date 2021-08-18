@@ -816,79 +816,79 @@ int main( void )
         EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
     }
 
-    // {
-    //     BEGIN_TEST(tm3, "Splice 1","splicing at the beginning.");
-    //     which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
-    //     which_lib::list<int> list_b{ 10, 20, 30 };        // List A
-    //     which_lib::list<int> list_r{ 10, 20, 30, 1, 2, 3, 4, 5 }; // List Result
+    {
+        BEGIN_TEST(tm3, "Splice 1","splicing at the beginning.");
+        which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
+        which_lib::list<int> list_b{ 10, 20, 30 };        // List A
+        which_lib::list<int> list_r{ 10, 20, 30, 1, 2, 3, 4, 5 }; // List Result
 
-    //     auto where{ list_a.cbegin() }; // where do we splice into?
-    //     list_a.splice( where, list_b ); // Merger B into A.
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Splice 2","splicing at the end.");
-    //     which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
-    //     which_lib::list<int> list_b{ 10, 20, 30 };        // List A
-    //     which_lib::list<int> list_r{ 1, 2, 3, 4, 5, 10, 20, 30 }; // List Result
+        auto where{ list_a.cbegin() }; // where do we splice into?
+        list_a.splice( where, list_b ); // Merger B into A.
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
+    }
+    {
+        BEGIN_TEST(tm3, "Splice 2","splicing at the end.");
+        which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
+        which_lib::list<int> list_b{ 10, 20, 30 };        // List A
+        which_lib::list<int> list_r{ 1, 2, 3, 4, 5, 10, 20, 30 }; // List Result
 
-    //     auto where{ list_a.cend() }; // where do we splice into?
-    //     list_a.splice( where, list_b ); // Merger B into A.
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Splice 3", "splicing at the middle.");
-    //     which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
-    //     which_lib::list<int> list_b{ 10, 20, 30 };        // List A
-    //     which_lib::list<int> list_r{ 1, 2, 10, 20, 30, 3, 4, 5 }; // List Result
+        auto where{ list_a.cend() }; // where do we splice into?
+        list_a.splice( where, list_b ); // Merger B into A.
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
+    }
+    {
+        BEGIN_TEST(tm3, "Splice 3", "splicing at the middle.");
+        which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
+        which_lib::list<int> list_b{ 10, 20, 30 };        // List A
+        which_lib::list<int> list_r{ 1, 2, 10, 20, 30, 3, 4, 5 }; // List Result
 
-    //     auto where{ list_a.cbegin() }; // where do we splice into?
-    //     std::advance( where, 2 ); // Jump 2 nodes.
-    //     list_a.splice( where, list_b ); // Merger B into A.
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Splice 4", "splicing an empty list into another list.");
-    //     which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
-    //     which_lib::list<int> list_b;        // List A
-    //     which_lib::list<int> list_r{ 1, 2, 3, 4, 5 }; // List Result
+        auto where{ list_a.cbegin() }; // where do we splice into?
+        std::advance( where, 2 ); // Jump 2 nodes.
+        list_a.splice( where, list_b ); // Merger B into A.
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
+    }
+    {
+        BEGIN_TEST(tm3, "Splice 4", "splicing an empty list into another list.");
+        which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
+        which_lib::list<int> list_b;        // List A
+        which_lib::list<int> list_r{ 1, 2, 3, 4, 5 }; // List Result
 
-    //     auto where{ list_a.cbegin() }; // where do we splice into?
-    //     std::advance( where, 2 ); // Jump 2 nodes.
-    //     list_a.splice( where, list_b ); // Merger B into A.
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Splice 5", "splicing an empty list into another list.");
-    //     which_lib::list<int> list_a{ 1, 2, 3, 4 };              // List B
-    //     which_lib::list<int> list_a_backup{ 1, 2, 3, 4 };              // List B
-    //     which_lib::list<int> list_r[] {
-    //         { 10, 20, 1, 2, 3, 4 },
-    //         { 1, 10, 20, 2, 3, 4 },
-    //         { 1, 2, 10, 20, 3, 4 },
-    //         { 1, 2, 3, 10, 20, 4 },
-    //         { 1, 2, 3, 4, 10, 20 }
-    //     }; // List Result
+        auto where{ list_a.cbegin() }; // where do we splice into?
+        std::advance( where, 2 ); // Jump 2 nodes.
+        list_a.splice( where, list_b ); // Merger B into A.
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
+    }
+    {
+        BEGIN_TEST(tm3, "Splice 5", "splicing an empty list into another list.");
+        which_lib::list<int> list_a{ 1, 2, 3, 4 };              // List B
+        which_lib::list<int> list_a_backup{ 1, 2, 3, 4 };              // List B
+        which_lib::list<int> list_r[] {
+            { 10, 20, 1, 2, 3, 4 },
+            { 1, 10, 20, 2, 3, 4 },
+            { 1, 2, 10, 20, 3, 4 },
+            { 1, 2, 3, 10, 20, 4 },
+            { 1, 2, 3, 4, 10, 20 }
+        }; // List Result
 
-    //     size_t i{0};
-    //     size_t how_many_times{ list_a.size() };
-    //     while ( i < how_many_times )
-    //     {
-    //         which_lib::list<int> list_b{ 10, 20 };  // List B
-    //         list_a = list_a_backup;                 // restore original list
-    //         auto where{ list_a.cbegin() };          // where do we splice into?
-    //         std::advance( where, i );               // Adavance splice position accordingly.
-    //         list_a.splice( where, list_b );         // splice B into A.
-    //         // std::cout << ">>> i = " << i << ", List A = " << list_a << '\n';
-    //         EXPECT_EQ( list_r[i], list_a );       // List A must be equal to list Result.
-    //         EXPECT_TRUE( list_b.empty() );          // List B must be empty (all nodes moved to A).
-    //         ++i;
-    //     }
-    // }
+        size_t i{0};
+        size_t how_many_times{ list_a.size() };
+        while ( i < how_many_times )
+        {
+            which_lib::list<int> list_b{ 10, 20 };  // List B
+            list_a = list_a_backup;                 // restore original list
+            auto where{ list_a.cbegin() };          // where do we splice into?
+            std::advance( where, i );               // Adavance splice position accordingly.
+            list_a.splice( where, list_b );         // splice B into A.
+            // std::cout << ">>> i = " << i << ", List A = " << list_a << '\n';
+            EXPECT_EQ( list_r[i], list_a );       // List A must be equal to list Result.
+            EXPECT_TRUE( list_b.empty() );          // List B must be empty (all nodes moved to A).
+            ++i;
+        }
+    }
 
     // {
     //     BEGIN_TEST(tm3, "Reverse 1", "reverse a regular list.");

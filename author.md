@@ -54,7 +54,7 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 
 **Utility methods (40 credits)**
 - [X] `merge(other)` (8 credits)
-- [ ] `splice(pos,other)` (8 credits)
+- [X] `splice(pos,other)` (8 credits)
 - [ ] `reverse()` (8 credits)
 - [ ] `unique()` (8 credits)
 - [ ] `sort()` (8 credits)
