@@ -275,22 +275,22 @@ int main( void )
     //     }
     // }
 
-    // {
-    //     BEGIN_TEST(tm, "PopFront", "PopFront");
-    //     // #1 From an empty list.
-    //     which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+    {
+        BEGIN_TEST(tm, "PopFront", "PopFront");
+        // #1 From an empty list.
+        which_lib::list<int> list{ 1, 2, 3, 4, 5 };
 
-    //     auto start{1};
-    //     while( not list.empty() )
-    //     {
-    //         list.pop_front();
-    //         // Checke whether we have the same list except for the last.
-    //         auto i {start};
-    //         for ( const auto & e: list )
-    //             EXPECT_EQ( e, ++i );
-    //         start++;
-    //     }
-    // }
+        auto start{1};
+        while( not list.empty() )
+        {
+            list.pop_front();
+            // Checke whether we have the same list except for the last.
+            auto i {start};
+            for ( const auto & e: list )
+                EXPECT_EQ( e, ++i );
+            start++;
+        }
+    }
 
 
     // {
@@ -375,18 +375,18 @@ int main( void )
     // // }
 
 
-    // {
-    //     BEGIN_TEST(tm, "OperatorEqual","OperatorEqual");
-    //     // #1 From an empty list.
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> list2 { 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> list3 { 1, 2, 8, 4, 5 };
-    //     which_lib::list<int> list4 { 8, 4, 5 };
+    {
+        BEGIN_TEST(tm, "OperatorEqual","OperatorEqual");
+        // #1 From an empty list.
+        which_lib::list<int> list { 1, 2, 3, 4, 5 };
+        which_lib::list<int> list2 { 1, 2, 3, 4, 5 };
+        which_lib::list<int> list3 { 1, 2, 8, 4, 5 };
+        which_lib::list<int> list4 { 8, 4, 5 };
 
-    //     EXPECT_EQ( list , list2 );
-    //     EXPECT_TRUE( not ( list == list3 ) );
-    //     EXPECT_TRUE( not ( list == list4 ) );
-    // }
+        EXPECT_EQ( list , list2 );
+        EXPECT_TRUE( not ( list == list3 ) );
+        EXPECT_TRUE( not ( list == list4 ) );
+    }
 
 
     // {

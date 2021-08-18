@@ -357,7 +357,12 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             m_len++;
         }
 
-        void pop_front( ) { /* TODO */ }
+        void pop_front() {
+            auto L {m_head->next};
+            m_head->next = m_head->next->next;
+            m_head->next->prev = m_head;
+            delete L;
+        }
 
         void pop_back( ) { /* TODO */ }
 
@@ -416,15 +421,22 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
 
     //=== [VI] OPETARORS
     template < typename T >
-    inline bool operator==( const sc::list<T> & l1_, const sc::list<T> & l2_ )
-    {
-        /* TODO */ return true;
+    inline bool operator==( const sc::list<T> & l1, const sc::list<T> & l2 ) {
+        if (l1.size() != l2.size())
+            return false;
+        auto it1 {l1.cbegin()};
+        auto it2 {l2.cbegin()};
+        while (it1 != l1.cend() && it2 != l2.cend()) {
+            if (*it1++ != *it2++)
+                return false;
+        }
+        return true;
     }
 
     template < typename T >
-    inline bool operator!=( const sc::list<T> & l1_, const sc::list<T> & l2_ )
-    {
-        /* TODO */ return true;
+    inline bool operator!=( const sc::list<T> & l1, const sc::list<T> & l2 ) {
+        /* TODO */
+        return true;
     }
 }
 #endif

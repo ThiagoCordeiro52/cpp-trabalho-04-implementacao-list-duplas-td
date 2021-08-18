@@ -35,15 +35,15 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 **Modifiers methods (21 credits)**
 - [X] `clear()` (1 credits)
 - [ ] `push_front()` (3 credits)
-- [ ] `push_back()` (3 credits)
-- [ ] `pop_front()` (3 credits)
+- [X] `push_back()` (3 credits)
+- [X] `pop_front()` (3 credits)
 - [ ] `pop_back()` (3 credits)
 - [ ] `assign(range)` (3 credits)
 - [ ] `assign(initializer list)` (3 credits)
 
 **Operator overloading (4 credits)**
-- [ ] `operator==()` (2 credits)
-- [X] `operator!=()` (2 credits)
+- [X] `operator==()` (2 credits)
+- [ ] `operator!=()` (2 credits)
 
 **Methods that require iterators (19 credits)**
 - [ ] `insert(iterator,value)` (4 credits)
