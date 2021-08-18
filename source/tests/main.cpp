@@ -198,7 +198,7 @@ int main( void )
         which_lib::list<int> list;
 
         EXPECT_TRUE( list.empty() );
-        for ( auto i{0} ; i < 5 ; ++i )
+        for ( auto i{0u} ; i < 5 ; ++i )
         {
             list.push_front( i+1 );
             EXPECT_EQ( list.size(),  i+1 );
@@ -294,57 +294,57 @@ int main( void )
     }
 
 
-    // {
-    //     BEGIN_TEST(tm, "Front", "front");
-    //     // #1 From an empty list.
-    //     which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+    {
+        BEGIN_TEST(tm, "Front", "front");
+        // #1 From an empty list.
+        which_lib::list<int> list{ 1, 2, 3, 4, 5 };
 
-    //     auto i{0};
-    //     while( not list.empty() )
-    //     {
-    //         auto current_size = list.size();
-    //         EXPECT_EQ( list.front(), ++i );
-    //         EXPECT_EQ( current_size, list.size() );
-    //         list.pop_front();
-    //     }
-    // }
+        auto i{0};
+        while( not list.empty() )
+        {
+            auto current_size = list.size();
+            EXPECT_EQ( list.front(), ++i );
+            EXPECT_EQ( current_size, list.size() );
+            list.pop_front();
+        }
+    }
 
-    // {
-    //     BEGIN_TEST(tm, "FrontConst","FrontConst");
-    //     // #1 From an empty list.
-    //     const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-    //     EXPECT_EQ( list.front(), 1 );
+    {
+        BEGIN_TEST(tm, "FrontConst","FrontConst");
+        // #1 From an empty list.
+        const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+        EXPECT_EQ( list.front(), 1 );
 
-    //     const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
-    //     EXPECT_EQ( list2.front(), 'a' );
-    // }
-
-
-    // {
-    //     BEGIN_TEST(tm, "Back","Back");
-    //     // #1 From an empty list.
-    //     which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-
-    //     auto i{5};
-    //     while( not list.empty() )
-    //     {
-    //         auto current_size = list.size();
-    //         EXPECT_EQ( list.back(), i-- );
-    //         EXPECT_EQ( current_size, list.size() );
-    //         list.pop_back();
-    //     }
-    // }
+        const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
+        EXPECT_EQ( list2.front(), 'a' );
+    }
 
 
-    // {
-    //     BEGIN_TEST(tm, "BackConst","BackConst");
-    //     // #1 From an empty list.
-    //     const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-    //     EXPECT_EQ( list.back(), 5 );
+    {
+        BEGIN_TEST(tm, "Back","Back");
+        // #1 From an empty list.
+        which_lib::list<int> list{ 1, 2, 3, 4, 5 };
 
-    //     const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
-    //     EXPECT_EQ( list2.back(), 'u' );
-    // }
+        auto i{5};
+        while( not list.empty() )
+        {
+            auto current_size = list.size();
+            EXPECT_EQ( list.back(), i-- );
+            EXPECT_EQ( current_size, list.size() );
+            list.pop_back();
+        }
+    }
+
+
+    {
+        BEGIN_TEST(tm, "BackConst","BackConst");
+        // #1 From an empty list.
+        const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+        EXPECT_EQ( list.back(), 5 );
+
+        const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
+        EXPECT_EQ( list2.back(), 'u' );
+    }
 
 
 
@@ -390,18 +390,18 @@ int main( void )
     }
 
 
-    // {
-    //     BEGIN_TEST(tm, "OperatorDifferent","OperatorDifferent");
-    //     // #1 From an empty list.
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> list2 { 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> list3 { 1, 2, 8, 4, 5 };
-    //     which_lib::list<int> list4 { 8, 4, 5 };
+    {
+        BEGIN_TEST(tm, "OperatorDifferent","OperatorDifferent");
+        // #1 From an empty list.
+        which_lib::list<int> list { 1, 2, 3, 4, 5 };
+        which_lib::list<int> list2 { 1, 2, 3, 4, 5 };
+        which_lib::list<int> list3 { 1, 2, 8, 4, 5 };
+        which_lib::list<int> list4 { 8, 4, 5 };
 
-    //     EXPECT_TRUE( not( list != list2 ) );
-    //     EXPECT_NE( list, list3 );
-    //     EXPECT_NE( list,list4 );
-    // }
+        EXPECT_TRUE( not( list != list2 ) );
+        EXPECT_NE( list, list3 );
+        EXPECT_NE( list,list4 );
+    }
 
 
     {
@@ -422,7 +422,6 @@ int main( void )
         EXPECT_EQ( list , ( which_lib::list<int>{ 0, 1, 2, 3, 4, 5, 6, 7 } ) );
 
     }
-
 
     {
         BEGIN_TEST(tm, "InsertRange","InsertRange");
@@ -573,25 +572,26 @@ int main( void )
     //     EXPECT_EQ( list.size() , 4 );
     // }
 
-    // {
-    //     BEGIN_TEST(tm, "Reverse","Checking the reverse methos");
-    //     // Regular case odd list length 
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5 };
-    //     list.reverse();
-    //     EXPECT_EQ( list , ( which_lib::list<int>{ 5, 4, 3, 2, 1 } ) );
-    //     // Regular case even list length
-    //     which_lib::list<int> list2 { 1, 2, 3, 4, 5, 6 };
-    //     list2.reverse();
-    //     EXPECT_EQ( list2 , ( which_lib::list<int>{ 6, 5, 4, 3, 2, 1 } ) );
-    //     // Single element case
-    //     which_lib::list<int> list3 { 1 };
-    //     list3.reverse();
-    //     EXPECT_EQ( list3 , ( which_lib::list<int>{ 1 } ) );
-    //     // Empty list case
-    //     which_lib::list<int> list4;
-    //     list4.reverse();
-    //     EXPECT_TRUE( list4.empty() );
-    // }
+    {
+        BEGIN_TEST(tm, "Reverse","Checking the reverse methos");
+        // Regular case odd list length 
+        which_lib::list<int> list { 1, 2, 3, 4, 5 };
+        list.reverse();
+
+        EXPECT_EQ( list , ( which_lib::list<int>{ 5, 4, 3, 2, 1 } ) );
+        // Regular case even list length
+        which_lib::list<int> list2 { 1, 2, 3, 4, 5, 6 };
+        list2.reverse();
+        EXPECT_EQ( list2 , ( which_lib::list<int>{ 6, 5, 4, 3, 2, 1 } ) );
+        // Single element case
+        which_lib::list<int> list3 { 1 };
+        list3.reverse();
+        EXPECT_EQ( list3 , ( which_lib::list<int>{ 1 } ) );
+        // Empty list case
+        which_lib::list<int> list4;
+        list4.reverse();
+        EXPECT_TRUE( list4.empty() );
+    }
 
     tm.summary();
 
@@ -915,8 +915,8 @@ int main( void )
     }
     {
         BEGIN_TEST(tm3, "Reverse 3", "reversing an empty list.");
-        which_lib::list<int> list_a{ 1 };              // List B
-        which_lib::list<int> list_r{ 1 }; // List Result
+        which_lib::list<int> list_a;              // List B
+        which_lib::list<int> list_r; // List Result
 
         list_a.reverse();
         EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.

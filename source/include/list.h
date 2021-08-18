@@ -525,6 +525,16 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 return m_tail->prev->data;
             }
 
+            /**
+             * @return the last value on the list
+             */
+            T back( void ) const  { 
+                if ( empty() )
+                    throw std::out_of_range("back(): cannot use the back method on an empty list.");
+
+                return m_tail->prev->data;
+            }
+
             void push_front( const T & value ) { 
                 insert(begin(), value);
             }
@@ -690,8 +700,8 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
              * @brief Reverses the list
              */
             void reverse( void ) { 
-                auto curr {m_head->next};
-                while (curr != m_tail) {
+                auto curr {m_head};
+                while (curr != nullptr) {
                     auto old_next {curr->next};
                     curr->next = curr->prev;
                     curr->prev = old_next;
@@ -699,9 +709,7 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                     curr = old_next;
                 }
 
-                auto old_first {m_head->next};
-                m_head->next = m_tail->prev;
-                m_tail->prev = old_first;
+                std::swap(m_head, m_tail);
             }
 
             void unique( void ){ return; }
