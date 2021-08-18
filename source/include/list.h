@@ -72,26 +72,26 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 }
                 const_iterator operator++() {
                     if (m_ptr == nullptr)
-                        throw std::length_error("operator++(): iterator already in end of list");
+                        throw std::out_of_range("operator++(): iterator already in end of list");
                     m_ptr = m_ptr->next;
                     return *this;
                 }
                 const_iterator operator++(int) {
                     if (m_ptr == nullptr)
-                        throw std::length_error("operator++(): iterator already in end of list");
+                        throw std::out_of_range("operator++(): iterator already in end of list");
                     auto old {m_ptr};
                     m_ptr = m_ptr->next;
                     return const_iterator{old};
                 }
                 const_iterator operator--() {
                     if (m_ptr == nullptr)
-                        throw std::length_error("operator--(): iterator already in begin of list");
+                        throw std::out_of_range("operator--(): iterator already in begin of list");
                     m_ptr = m_ptr->prev;
                     return *this; 
                 }
                 const_iterator operator--(int) {
                     if (m_ptr == nullptr)
-                        throw std::length_error("operator--(): iterator already in begin of list");
+                        throw std::out_of_range("operator--(): iterator already in begin of list");
                     auto old {m_ptr};
                     m_ptr = m_ptr->prev;
                     return const_iterator{old}; 
@@ -153,26 +153,26 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 }
                 iterator operator++() {
                     if (m_ptr == nullptr)
-                        throw std::length_error("operator++(): iterator already in end of list");
+                        throw std::out_of_range("operator++(): iterator already in end of list");
                     m_ptr = m_ptr->next;
                     return *this;
                 }
                 iterator operator++(int) {
                     if (m_ptr == nullptr)
-                        throw std::length_error("operator++(): iterator already in end of list");
+                        throw std::out_of_range("operator++(): iterator already in end of list");
                     auto old {m_ptr};
                     m_ptr = m_ptr->next;
                     return iterator{old};
                 }
                 iterator operator--() { 
                     if (m_ptr == nullptr)
-                        throw std::length_error("operator--(): iterator already in begin of list");
+                        throw std::out_of_range("operator--(): iterator already in begin of list");
                     m_ptr = m_ptr->prev;
                     return *this; 
                  }
                 iterator operator--(int) {
                     if (m_ptr == nullptr)
-                        throw std::length_error("operator--(): iterator already in begin of list");
+                        throw std::out_of_range("operator--(): iterator already in begin of list");
                     auto old {m_ptr};
                     m_ptr = m_ptr->prev; 
                     return iterator{old}; 
@@ -250,7 +250,17 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         }
         template< typename InputIt >
         list( InputIt first, InputIt last ) { /* TODO */ }
-        list( const list & clone ) : m_len{clone.m_len}, m_head{clone.m_head}, m_tail{clone.m_tail} {}
+        list( const list & clone ) : m_len{clone.m_len}, m_head{new Node}, m_tail{new Node} {
+            auto prev = m_head;
+            for (auto it {clone.cbegin()}; it != clone.cend(); it++) {
+                auto curr {new Node{*it}};
+                prev->next = curr;
+                curr->prev = prev;
+                prev = curr;
+            }
+            prev->next = m_tail;
+            m_tail->prev = prev;
+        }
         list( std::initializer_list<T> ilist ) { 
             m_head = new Node;
             m_tail = new Node;
@@ -278,19 +288,30 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         iterator begin() {
             return iterator{m_head->next};
         }
-        const_iterator cbegin() const  { /* TODO */ return const_iterator{}; }
+        const_iterator cbegin() const  { 
+            return const_iterator{m_head->next}; }
         iterator end() {
             return iterator{m_tail};
         }
-        const_iterator cend() const  { /* TODO */ return const_iterator{}; }
+        const_iterator cend() const  { 
+            return const_iterator{m_tail}; 
+        }
         //=== [III] Capacity/Status
-        bool empty ( void ) const { /* TODO */  return true; }
+        bool empty ( void ) const { 
+            return m_head->next == m_tail;
+         }
         size_t size(void) const {
             return m_len;
         }
         //=== [IV] Modifiers
         void clear()  { /* TODO */ }
-        T front( void ) { /* TODO */ return T{}; }
+        T front( void ) {
+            if ( empty() ) {
+               throw std::out_of_range("front(): cannot use the front method on an empty list.");
+            }
+            auto element = m_head->next(); 
+            return T{element->data}; 
+        }
         T front( void ) const  { /* TODO */ return T{}; }
         T back( void ) { /* TODO */ return T{}; }
         T back( void ) const  { /* TODO */ return T{}; }
