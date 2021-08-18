@@ -46,8 +46,8 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 - [ ] `operator!=()` (2 credits)
 
 **Methods that require iterators (19 credits)**
-- [ ] `insert(iterator,value)` (4 credits)
-- [ ] `insert(iterator,range)` (4 credits)
+- [X] `insert(iterator,value)` (4 credits)
+- [X] `insert(iterator,range)` (4 credits)
 - [ ] `insert(iterator,initializer list)` (4 credits)
 - [ ] `erase(iterator)` (3 credits)
 - [ ] `erase(range)` (3 credits)

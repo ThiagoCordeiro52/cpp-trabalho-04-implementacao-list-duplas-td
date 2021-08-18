@@ -125,21 +125,21 @@ int main( void )
 //#endif
 
 
-    // {
-    //     BEGIN_TEST(tm, "AssignOperator", "ASSIGN OPERATOR");
-    //     // Range = the entire list.
-    //     which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> list2;
+    {
+        BEGIN_TEST(tm, "AssignOperator", "ASSIGN OPERATOR");
+        // Range = the entire list.
+        which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+        which_lib::list<int> list2;
 
-    //     list2 = list;
-    //     EXPECT_EQ( list2.size(), 5 );
-    //     EXPECT_FALSE( list2.empty() );
+        list2 = list;
+        EXPECT_EQ( list2.size(), 5 );
+        EXPECT_FALSE( list2.empty() );
 
-    //     // recover elements to test.
-    //     auto i{1};
-    //     for( auto e : list2 )
-    //         EXPECT_EQ ( e,i++ );;
-    // }
+        // recover elements to test.
+        auto i{1};
+        for( auto e : list2 )
+            EXPECT_EQ ( e,i++ );;
+    }
 
 //#ifdef MOVE_SYNTAX_IMPLEMENTED  
     // // // {
@@ -162,19 +162,20 @@ int main( void )
 //#endif
 
 
-    {
-        BEGIN_TEST(tm, "ListInitializerAssign","initializer list assignment");
-        // Range = the entire list.
-        which_lib::list<int> list = { 1, 2, 3, 4, 5 };
+    // {
+    //     BEGIN_TEST(tm, "ListInitializerAssign","initializer list assignment");
+    //     // Range = the entire list.
+    //     which_lib::list<int> list;
+    //     list = { 1, 2, 3, 4, 5 };
 
-        EXPECT_EQ( list.size(), 5 );
-        EXPECT_FALSE( list.empty() );
+    //     EXPECT_EQ( list.size(), 5 );
+    //     EXPECT_FALSE( list.empty() );
 
-        // recover elements to test.
-        auto i{1};
-        for( auto e : list )
-            EXPECT_EQ ( e, i++ );
-    }
+    //     // recover elements to test.
+    //     auto i{1};
+    //     for( auto e : list )
+    //         EXPECT_EQ ( e, i++ );
+    // }
 
 
     {
@@ -403,54 +404,54 @@ int main( void )
     // }
 
 
-    // {
-    //     BEGIN_TEST(tm, "InsertSingleValueAtPosition","InsertSingleValueAtPosition");
-    //     // #1 From an empty list.
-    //     which_lib::list<int> list { 1, 2, 4, 5, 6 };
+    {
+        BEGIN_TEST(tm, "InsertSingleValueAtPosition","InsertSingleValueAtPosition");
+        // #1 From an empty list.
+        which_lib::list<int> list { 1, 2, 4, 5, 6 };
 
-    //     // Insert at front
-    //     list.insert( list.begin(), 0 );
-    //     EXPECT_EQ( list , ( which_lib::list<int>{ 0, 1, 2, 4, 5, 6 } ) );
+        // Insert at front
+        list.insert( list.begin(), 0 );
+        EXPECT_EQ( list , ( which_lib::list<int>{ 0, 1, 2, 4, 5, 6 } ) );
 
-    //     // Insert in the middle
-    //     list.insert( std::next(list.begin(),3), 3 );
-    //     EXPECT_EQ( list , ( which_lib::list<int>{ 0, 1, 2, 3, 4, 5, 6 } ) );
+        // Insert in the middle
+        list.insert( std::next(list.begin(),3), 3 );
+        EXPECT_EQ( list , ( which_lib::list<int>{ 0, 1, 2, 3, 4, 5, 6 } ) );
 
-    //     // Insert at the end
-    //     list.insert( list.end(), 7 );
-    //     EXPECT_EQ( list , ( which_lib::list<int>{ 0, 1, 2, 3, 4, 5, 6, 7 } ) );
+        // Insert at the end
+        list.insert( list.end(), 7 );
+        EXPECT_EQ( list , ( which_lib::list<int>{ 0, 1, 2, 3, 4, 5, 6, 7 } ) );
 
-    // }
+    }
 
 
-    // {
-    //     BEGIN_TEST(tm, "InsertRange","InsertRange");
-    //     // Aux arrays.
-    //     which_lib::list<int> list1 { 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> list2 { 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> source { 6, 7, 8, 9, 10 };
+    {
+        BEGIN_TEST(tm, "InsertRange","InsertRange");
+        // Aux arrays.
+        which_lib::list<int> list1 { 1, 2, 3, 4, 5 };
+        which_lib::list<int> list2 { 1, 2, 3, 4, 5 };
+        which_lib::list<int> source { 6, 7, 8, 9, 10 };
 
-    //     // Inset at the beginning.
-    //     list1.insert( list1.begin(), source.begin(), source.end() );
-    //     EXPECT_EQ( list1 , ( which_lib::list<int>{ 6, 7, 8, 9, 10, 1, 2, 3, 4, 5 } ) );
+        // Inset at the beginning.
+        list1.insert( list1.begin(), source.begin(), source.end() );
+        EXPECT_EQ( list1 , ( which_lib::list<int>{ 6, 7, 8, 9, 10, 1, 2, 3, 4, 5 } ) );
 
-    //     // In the middle
-    //     list1 = list2;
-    //     list1.insert( std::next( list1.begin(), 2 ), source.begin(), source.end() );
+        // In the middle
+        list1 = list2;
+        list1.insert( std::next( list1.begin(), 2 ), source.begin(), source.end() );
 
-    //     EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 6, 7, 8, 9, 10, 3, 4, 5 } ) );
+        EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 6, 7, 8, 9, 10, 3, 4, 5 } ) );
 
-    //     // At the end
-    //     list1 = list2;
-    //     list1.insert( list1.end(), source.begin(), source.end() );
-    //     EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } ) );
+        // At the end
+        list1 = list2;
+        list1.insert( list1.end(), source.begin(), source.end() );
+        EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } ) );
 
-    //     // // Outside
-    //     // list1 = list2;
-    //     // list1.insert( std::next( list1.end(), 2 ) , source.begin(), source.end() );
-    //     // EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5 } ) );
+        // // Outside
+        // list1 = list2;
+        // list1.insert( std::next( list1.end(), 2 ) , source.begin(), source.end() );
+        // EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5 } ) );
 
-    // }
+    }
 
 
     // {

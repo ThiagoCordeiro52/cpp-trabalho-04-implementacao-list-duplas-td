@@ -194,14 +194,6 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 /// it1 - it2
                 difference_type operator-( const iterator & rhs ) const { /* TODO */ return 0; }
 
-                // friend iterator operator+(iterator it, int n) {
-                //     auto new_it {it};
-                //     for (auto i {0}; i < n; i++) {
-                //         new_it++;
-                //     }
-                //     return new_it;
-                // }
-
                 // We need friendship so the list<T> class may access the m_ptr field.
                 friend class list<T>;
 
@@ -278,11 +270,20 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             m_len = ilist.size();
         }
         ~list() { /* TODO */ }
+        // TODO (davi): maybe change to use erase insted of first while
         list & operator=( const list & rhs ) {
-            clear();
-            m_len = rhs.m_len;
-            m_head = rhs.m_head;
-            m_tail = rhs.m_tail;
+            // Ensure the size this lsit is not greater than the other, liberating memory if necessary
+            while (m_len > rhs.m_len)
+                pop_back();
+            
+            // Puts all the values this values this list can hold right now
+            auto last {std::next(rhs.cbegin(), m_len)};
+            std::copy(rhs.cbegin(), last, begin());
+
+            // Pushs the remaing valeus to the end of list
+            for (auto it {last}; it != rhs.cend(); it++)
+                push_back(*it);
+
             return *this;
         }
         list & operator=( std::initializer_list<T> ilist_ ) { /* TODO */ return *this;}
@@ -349,12 +350,7 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         void push_front( const T & value_ ) { /* TODO */ }
 
         void push_back( const T & value ) {
-            auto new_node {new Node{value}};
-            m_tail->prev->next = new_node;
-            new_node->prev = m_tail->prev;
-            new_node->next = m_tail;
-            m_tail->prev = new_node;
-            m_len++;
+            insert(end(), value);
         }
 
         void pop_front() {
@@ -364,7 +360,10 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             delete L;
         }
 
-        void pop_back( ) { /* TODO */ }
+        // TODO (thiago): FIX THIS
+        void pop_back() { 
+            m_len--;
+        }
 
         //=== [IV-a] MODIFIERS W/ ITERATORS
         template < class InItr >
@@ -378,16 +377,29 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
          *  Inserts a new value in the list before the iterator 'it'
          *  and returns an iterator to the new node.
          *
-         *  \param pos_ An iterator to the position before which we want to insert the new data.
-         *  \param value_ The value we want to insert in the list.
+         *  \param pos An iterator to the position before which we want to insert the new data.
+         *  \param value The value we want to insert in the list.
          *  \return An iterator to the new element in the list.
          */
-        iterator insert( iterator pos_, const T & value_ )
-        { /* TODO */ return iterator{}; }
+        iterator insert( iterator pos, const T & value ) {
+            auto new_node {new Node{value}};
+            new_node->prev       = pos.m_ptr->prev;
+            new_node->prev->next = new_node;
+            new_node->next       = pos.m_ptr;
+            new_node->next->prev = new_node;
+
+            m_len++;
+
+            return iterator{new_node};
+        }
 
         template < typename InItr >
-        iterator insert( iterator pos_, InItr first_, InItr last_ ) 
-        { /* TODO */ return iterator{}; }
+        iterator insert( iterator pos, InItr first, InItr last ) { 
+            // Go trough range in reverse order and insert always at the same position
+            for (auto it {last}; it != first; it--)
+                pos = insert(pos, *std::prev(it));
+            return pos;
+        }
         
         iterator insert( iterator cpos_, std::initializer_list<T> ilist_ )
         { /* TODO */ return iterator{}; }
