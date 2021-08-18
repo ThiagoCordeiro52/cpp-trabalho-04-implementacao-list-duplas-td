@@ -294,30 +294,30 @@ int main( void )
     }
 
 
-    // {
-    //     BEGIN_TEST(tm, "Front", "front");
-    //     // #1 From an empty list.
-    //     which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+    {
+        BEGIN_TEST(tm, "Front", "front");
+        // #1 From an empty list.
+        which_lib::list<int> list{ 1, 2, 3, 4, 5 };
 
-    //     auto i{0};
-    //     while( not list.empty() )
-    //     {
-    //         auto current_size = list.size();
-    //         EXPECT_EQ( list.front(), ++i );
-    //         EXPECT_EQ( current_size, list.size() );
-    //         list.pop_front();
-    //     }
-    // }
+        auto i{0};
+        while( not list.empty() )
+        {
+            auto current_size = list.size();
+            EXPECT_EQ( list.front(), ++i );
+            EXPECT_EQ( current_size, list.size() );
+            list.pop_front();
+        }
+    }
 
-    // {
-    //     BEGIN_TEST(tm, "FrontConst","FrontConst");
-    //     // #1 From an empty list.
-    //     const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-    //     EXPECT_EQ( list.front(), 1 );
+    {
+        BEGIN_TEST(tm, "FrontConst","FrontConst");
+        // #1 From an empty list.
+        const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+        EXPECT_EQ( list.front(), 1 );
 
-    //     const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
-    //     EXPECT_EQ( list2.front(), 'a' );
-    // }
+        const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
+        EXPECT_EQ( list2.front(), 'a' );
+    }
 
 
     // {
@@ -336,15 +336,15 @@ int main( void )
     // }
 
 
-    // {
-    //     BEGIN_TEST(tm, "BackConst","BackConst");
-    //     // #1 From an empty list.
-    //     const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-    //     EXPECT_EQ( list.back(), 5 );
+    {
+        BEGIN_TEST(tm, "BackConst","BackConst");
+        // #1 From an empty list.
+        const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+        EXPECT_EQ( list.back(), 5 );
 
-    //     const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
-    //     EXPECT_EQ( list2.back(), 'u' );
-    // }
+        const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
+        EXPECT_EQ( list2.back(), 'u' );
+    }
 
 
 
