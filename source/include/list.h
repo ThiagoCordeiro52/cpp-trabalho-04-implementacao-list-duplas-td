@@ -464,7 +464,20 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             m_len += other.m_len;
             other.m_len = 0;
         }
-        void reverse( void ){ return; }
+        void reverse( void ) { 
+            auto curr {m_head->next};
+            while (curr != m_tail) {
+                auto old_next {curr->next};
+                curr->next = curr->prev;
+                curr->prev = old_next;
+
+                curr = old_next;
+            }
+
+            auto old_first {m_head->next};
+            m_head->next = m_tail->prev;
+            m_tail->prev = old_first;
+        }
         void unique( void ){ return; }
         void sort( void ){ return; }
     };

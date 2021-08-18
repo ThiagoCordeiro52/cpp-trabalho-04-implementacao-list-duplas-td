@@ -890,37 +890,37 @@ int main( void )
         }
     }
 
-    // {
-    //     BEGIN_TEST(tm3, "Reverse 1", "reverse a regular list.");
-    //     which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
-    //     which_lib::list<int> list_r{ 5, 4, 3, 2, 1 }; // List Result
+    {
+        BEGIN_TEST(tm3, "Reverse 1", "reverse a regular list.");
+        which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
+        which_lib::list<int> list_r{ 5, 4, 3, 2, 1 }; // List Result
 
-    //     list_a.reverse();
-    //     auto add_first{ list_a.begin() };
-    //     auto add_last{ std::prev( list_a.end() ) };
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     // Make sure no new node has been created.
-    //     *add_first = 50; // Iterators must remain valid.
-    //     *add_last = 10;
-    //     which_lib::list<int> list_r2{ 50, 4, 3, 2, 10 }; // List Result
-    //     EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Reverse 2", "reversing a single element list.");
-    //     which_lib::list<int> list_a{ 1 };              // List B
-    //     which_lib::list<int> list_r{ 1 }; // List Result
+        list_a.reverse();
+        auto add_first{ list_a.begin() };
+        auto add_last{ std::prev( list_a.end() ) };
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        // Make sure no new node has been created.
+        *add_first = 50; // Iterators must remain valid.
+        *add_last = 10;
+        which_lib::list<int> list_r2{ 50, 4, 3, 2, 10 }; // List Result
+        EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
+    }
+    {
+        BEGIN_TEST(tm3, "Reverse 2", "reversing a single element list.");
+        which_lib::list<int> list_a{ 1 };              // List B
+        which_lib::list<int> list_r{ 1 }; // List Result
 
-    //     list_a.reverse();
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Reverse 3", "reversing an empty list.");
-    //     which_lib::list<int> list_a{ 1 };              // List B
-    //     which_lib::list<int> list_r{ 1 }; // List Result
+        list_a.reverse();
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+    }
+    {
+        BEGIN_TEST(tm3, "Reverse 3", "reversing an empty list.");
+        which_lib::list<int> list_a{ 1 };              // List B
+        which_lib::list<int> list_r{ 1 }; // List Result
 
-    //     list_a.reverse();
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    // }
+        list_a.reverse();
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+    }
 
 
     // {
