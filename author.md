@@ -4,11 +4,11 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 
 - Nome: *José Davi Viana Francelino*
 - Email: *jose.davi@imd.ufrn.br*
-- Turma: *<insira sua turma aqui>*
+- Turma: *DIM0120-T01*
 
 - Nome: *Thiago de Oliveira Cordeiro*
 - Email: *thiagoty52@gmail.com*
-- Turma: *<insira sua turma aqui>*
+- Turma: *DIM0120-T01*
 
 # Indique quais métodos das classes abaixo foram implementados
 
@@ -42,12 +42,12 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 - [X] `push_back()` (3 credits)
 - [X] `pop_front()` (3 credits)
 - [X] `pop_back()` (3 credits)
-- [ ] `assign(range)` (3 credits)
-- [ ] `assign(initializer list)` (3 credits)
+- [X] `assign(range)` (3 credits)
+- [X] `assign(initializer list)` (3 credits)
 
 **Operator overloading (4 credits)**
 - [X] `operator==()` (2 credits)
-- [ ] `operator!=()` (2 credits)
+- [X] `operator!=()` (2 credits)
 
 **Methods that require iterators (19 credits)**
 - [X] `insert(iterator,value)` (4 credits)

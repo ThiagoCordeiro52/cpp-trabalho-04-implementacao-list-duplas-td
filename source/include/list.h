@@ -593,11 +593,21 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
 
             //=== [IV-a] MODIFIERS W/ ITERATORS
             template < class InItr >
-            void assign( InItr first_, InItr last_ )
-            { /* TODO */ }
+            void assign( InItr first, InItr last )
+            { 
+                clear();
+                m_len = 0;
+                while(first != last) {
+                    push_back(*first);
+                    first++;
+                    m_len++;
+                }
+            }
 
-            void assign( std::initializer_list<T> ilist_ )
-            { /* TODO */ }
+            void assign( std::initializer_list<T> ilist )
+            { 
+                *this = ilist;
+             }
 
             /*!
              *  Inserts a new value in the list before the iterator 'it'
