@@ -236,24 +236,34 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
              */
         }
 
-        explicit list( size_t count ) { /* TODO */ }
+        explicit list( size_t count ) {
+            m_head = new Node;
+            m_tail = new Node;
+            auto prev {m_head};
+            for (auto i {0u}; i < count; i++) {
+                auto curr {new Node};
+                prev->next = curr;
+                curr->prev = prev;
+                prev = curr;
+            }
+            m_len = count;
+        }
         template< typename InputIt >
         list( InputIt first, InputIt last ) { /* TODO */ }
         list( const list & clone ) : m_len{clone.m_len}, m_head{clone.m_head}, m_tail{clone.m_tail} {}
         list( std::initializer_list<T> ilist ) { 
             m_head = new Node;
             m_tail = new Node;
-            m_len = 0;
             auto prev {m_head};
             for (auto it {ilist.begin()}; it != ilist.end(); it++) {
                 auto curr {new Node{*it}};
                 prev->next = curr;
                 curr->prev = prev;
                 prev = curr;
-                m_len++;
             }
             prev->next = m_tail;
             m_tail->prev = prev;
+            m_len = ilist.size();
         }
         ~list() { /* TODO */ }
         list & operator=( const list & rhs ) { /* TODO */ return *this;}

@@ -13,14 +13,14 @@
 // ============================================================================
 //
 template < typename T>
-std::ostream & operator<<( std::ostream &os, which_lib::list<T> & L )
+std::ostream & operator<<( std::ostream &os, const which_lib::list<T> & L )
 {
-    std::cout << "[ " << std::flush;
+    os << "[ " << std::flush;
 
-    auto it{ L.begin() };
-    while ( it != L.end() )
-        std::cout << *it++ << " " << std::flush;
-    std::cout << "]";
+    auto it{ L.cbegin() };
+    while ( it != L.cend() )
+        os << *it++ << " " << std::flush;
+    os << "]";
     return os;
 }
 
@@ -37,28 +37,28 @@ int main( void )
     //     EXPECT_TRUE( list.empty() );
     // }
 
-    // {
-    //     BEGIN_TEST(tm, "ConstructorSize", "Constructor size");
+    {
+        BEGIN_TEST(tm, "ConstructorSize", "Constructor size");
 
-    //     which_lib::list<int> list(10);
+        which_lib::list<int> list(10);
 
-    //     EXPECT_EQ(list.size(), 10);
-    //     EXPECT_FALSE(list.empty());
-    // }
-
-
-    // {
-    //     BEGIN_TEST(tm,"ListContructor", "initializer list constructor.");
-
-    //     which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-    //     EXPECT_EQ( list.size(), 5 );
-    //     EXPECT_FALSE( list.empty() );
+        EXPECT_EQ(list.size(), 10);
+        EXPECT_FALSE(list.empty());
+    }
 
 
-    //     int i { 0 };
-    //     for( auto it = list.cbegin() ; it != list.cend() ; ++i )
-    //         EXPECT_EQ( i+1, *it++ );
-    // }   
+    {
+        BEGIN_TEST(tm,"ListContructor", "initializer list constructor.");
+
+        which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+        EXPECT_EQ( list.size(), 5 );
+        EXPECT_FALSE( list.empty() );
+
+
+        int i { 0 };
+        for( auto it = list.cbegin() ; it != list.cend() ; ++i )
+            EXPECT_EQ( i+1, *it++ );
+    }   
 
     // {
     //     BEGIN_TEST(tm,"RangeConstructor", "checking constructors with a range of values");
@@ -122,7 +122,7 @@ int main( void )
     // //     for( auto i{0u} ; i < list2.size() ; ++i )
     // //         EXPECT_EQ( i+1, list2[i] );
     // // }
-//#end// if
+//#endif
 
 
     // {
@@ -141,7 +141,7 @@ int main( void )
     //         EXPECT_EQ ( e,i++ );;
     // }
 
-//#ifd// ef MOVE_SYNTAX_IMPLEMENTED  
+//#ifdef MOVE_SYNTAX_IMPLEMENTED  
     // // // {
     // // //     BEGIN_TEST(tm, "MoveAssignOperator", "MoveAssignOperator");
     // // //     // Range = the entire list.
@@ -159,7 +159,7 @@ int main( void )
     // // //     for( auto i{0u} ; i < list2.size() ; ++i )
     // // //         EXPECT_EQ( i+1, list2[i] );
     // // // }
-//#end// if
+//#endif
 
 
     // {
@@ -642,9 +642,7 @@ int main( void )
     {
         BEGIN_TEST(tm2, "end","list.end()");
 
-        std::cout << "\n\n\nstart:\n";
         which_lib::list<int> list { 1, 2, 4, 5, 6 };
-        std::cout << list << '\n';
         which_lib::list<int>::iterator it = std::next( list.begin(), 5 );
         EXPECT_EQ( it, list.end() );
 
@@ -682,74 +680,74 @@ int main( void )
     //     EXPECT_EQ( it, list4.cend() );
     // }
 
-    // {
-    //     BEGIN_TEST(tm2, "operator++()","Preincrement, ++it");
+    {
+        BEGIN_TEST(tm2, "operator++()","Preincrement, ++it");
 
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5 };
-    //     int expected[]{1, 2, 3, 4, 5};
+        which_lib::list<int> list { 1, 2, 3, 4, 5 };
+        int expected[]{1, 2, 3, 4, 5};
 
-    //     auto it = list.begin();
-    //     for ( const auto & e : expected )
-    //     {
-    //         EXPECT_EQ( *it, e );
-    //         ++it;
-    //     }
-    // }
-    // 
-    // {
-    //     BEGIN_TEST(tm2, "operator++(int)","Postincrement, it++");
+        auto it = list.begin();
+        for ( const auto & e : expected )
+        {
+            EXPECT_EQ( *it, e );
+            ++it;
+        }
+    }
+    
+    {
+        BEGIN_TEST(tm2, "operator++(int)","Postincrement, it++");
 
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5 };
-    //     int expected[]{1, 2, 3, 4, 5};
+        which_lib::list<int> list { 1, 2, 3, 4, 5 };
+        int expected[]{1, 2, 3, 4, 5};
 
-    //     auto it = list.begin();
-    //     for ( const auto & e : expected )
-    //     {
-    //         EXPECT_EQ( *it, e );
-    //         it++;
-    //     }
-    // }
+        auto it = list.begin();
+        for ( const auto & e : expected )
+        {
+            EXPECT_EQ( *it, e );
+            it++;
+        }
+    }
 
-    // {
-    //     BEGIN_TEST(tm2, "operator--()","Preincrement, --it");
+    {
+        BEGIN_TEST(tm2, "operator--()","Preincrement, --it");
 
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5 };
-    //     int expected[]{5, 4, 3, 2, 1};
+        which_lib::list<int> list { 1, 2, 3, 4, 5 };
+        int expected[]{5, 4, 3, 2, 1};
 
-    //     auto it = list.end();
-    //     for ( const auto & e : expected )
-    //     {
-    //         --it;
-    //         EXPECT_EQ( *it, e );
-    //     }
-    // }
-    // 
-    // {
-    //     BEGIN_TEST(tm2, "operator--(int)","Postincrement, it--");
+        auto it = list.end();
+        for ( const auto & e : expected )
+        {
+            --it;
+            EXPECT_EQ( *it, e );
+        }
+    }
+    
+    {
+        BEGIN_TEST(tm2, "operator--(int)","Postincrement, it--");
 
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5 };
-    //     int expected[]{5, 4, 3, 2, 1};
+        which_lib::list<int> list { 1, 2, 3, 4, 5 };
+        int expected[]{5, 4, 3, 2, 1};
 
-    //     auto it = list.end();
-    //     for ( const auto & e : expected )
-    //     {
-    //         it--;
-    //         EXPECT_EQ( *it, e );
-    //     }
-    // }
+        auto it = list.end();
+        for ( const auto & e : expected )
+        {
+            it--;
+            EXPECT_EQ( *it, e );
+        }
+    }
 
-    // {
-    //     BEGIN_TEST(tm2, "operator*()"," x = *it1");
+    {
+        BEGIN_TEST(tm2, "operator*()"," x = *it1");
 
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5, 6 };
+        which_lib::list<int> list { 1, 2, 3, 4, 5, 6 };
 
-    //     auto it = list.begin();
-    //     int i{1};
-    //     while( it != list.end() )
-    //         EXPECT_EQ( *it++ , i++ );
-    // }
+        auto it = list.begin();
+        int i{1};
+        while( it != list.end() )
+            EXPECT_EQ( *it++ , i++ );
+    }
 
-    // std::cout << std::endl;
+    std::cout << std::endl;
     tm2.summary();
 
     // //=== TESTING UTILITY METHODS
