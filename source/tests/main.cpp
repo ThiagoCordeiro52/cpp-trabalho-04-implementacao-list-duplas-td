@@ -28,14 +28,14 @@ int main( void )
 {
     //=== TESTING BASIC OPERATIONS METHODS
     TestManager tm{ "Basic Operations Test Suite"};
-    // {
-    //     BEGIN_TEST(tm,"DefaultConstructor", "default constructor");
+    {
+        BEGIN_TEST(tm,"DefaultConstructor", "default constructor");
 
-    //     which_lib::list<int> list;
+        which_lib::list<int> list;
 
-    //     EXPECT_EQ( list.size(), 0);
-    //     EXPECT_TRUE( list.empty() );
-    // }
+        EXPECT_EQ( list.size(), 0);
+        EXPECT_TRUE( list.empty() );
+    }
 
     {
         BEGIN_TEST(tm, "ConstructorSize", "Constructor size");
@@ -177,19 +177,19 @@ int main( void )
     }
 
 
-    // {
-    //     BEGIN_TEST(tm, "Clear", "clear");
-    //     // Range = the entire list.
-    //     which_lib::list<int> list = { 1, 2, 3, 4, 5 };
+    {
+        BEGIN_TEST(tm, "Clear", "clear");
+        // Range = the entire list.
+        which_lib::list<int> list = { 1, 2, 3, 4, 5 };
 
-    //     EXPECT_EQ( list.size(), 5 );
-    //     EXPECT_FALSE( list.empty() );
+        EXPECT_EQ( list.size(), 5 );
+        EXPECT_FALSE( list.empty() );
 
-    //     list.clear();
+        list.clear();
 
-    //     EXPECT_EQ( list.size(), 0 );
-    //     EXPECT_TRUE( list.empty() );
-    // }
+        EXPECT_EQ( list.size(), 0 );
+        EXPECT_TRUE( list.empty() );
+    }
 
     // {
     //     BEGIN_TEST(tm, "PushFront","PushFront");
@@ -228,37 +228,37 @@ int main( void )
     // }
 
 
-    // {
-    //     BEGIN_TEST(tm, "PushBack", "PushBack");
-    //     // #1 From an empty list.
-    //     which_lib::list<int> list;
+    {
+        BEGIN_TEST(tm, "PushBack", "PushBack");
+        // #1 From an empty list.
+        which_lib::list<int> list;
 
-    //     EXPECT_TRUE( list.empty() );
-    //     for ( auto i{0} ; i < 5 ; ++i )
-    //     {
-    //         list.push_back( i+1 );
-    //         EXPECT_EQ( list.size(),  i+1 );
-    //     }
-    //     EXPECT_FALSE( list.empty() );
+        EXPECT_TRUE( list.empty() );
+        for ( auto i{0u} ; i < 5 ; ++i )
+        {
+            list.push_back( i+1 );
+            EXPECT_EQ( list.size(),  i+1 );
+        }
+        EXPECT_FALSE( list.empty() );
 
-    //     auto i{0};
-    //     for ( const auto & e: list )
-    //         EXPECT_EQ( e , ++i );
+        auto i{0};
+        for ( const auto & e: list )
+            EXPECT_EQ( e , ++i );
 
-    //     // REmove all elements.
-    //     list.clear();
-    //     EXPECT_TRUE( list.empty()  );
-    //     for ( auto i{0} ; i < 5 ; ++i )
-    //     {
-    //         list.push_back( i+1 );
-    //         EXPECT_EQ( list.size(),  i+1 );
-    //     }
-    //     EXPECT_FALSE( list.empty() );
+        // REmove all elements.
+        list.clear();
+        EXPECT_TRUE( list.empty()  );
+        for ( auto i{0u} ; i < 5 ; ++i )
+        {
+            list.push_back( i+1 );
+            EXPECT_EQ( list.size(),  i+1 );
+        }
+        EXPECT_FALSE( list.empty() );
 
-    //     i=0;
-    //     for ( const auto & e: list )
-    //         EXPECT_EQ( e , ++i );
-    // }
+        i=0;
+        for ( const auto & e: list )
+            EXPECT_EQ( e , ++i );
+    }
 
     // {
     //     BEGIN_TEST(tm, "PopBack", "PopBack");

@@ -11,7 +11,7 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 ## Implementação de List
 
 **Special members (20 credits)**
-- [ ] Regular constructor (3 credits)
+- [X] Regular constructor (3 credits)
 - [X] Constructor size (3 credits)
 - [ ] Destructor (3 credits)
 - [X] Copy constructor (3 credits)

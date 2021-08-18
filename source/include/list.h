@@ -223,7 +223,7 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         //=== Public interface
 
         //=== [I] Special members
-        list() { 
+        list() : m_len{0}, m_head{new Node}, m_tail{new Node} { 
             /*  Head & tail nodes.
              *     +---+    +---+
              *     |   |--->|   |--+
@@ -234,6 +234,8 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
              * ===                ===
              *  =                  =
              */
+            m_head->next = m_tail;
+            m_tail->prev = m_head;
         }
 
         explicit list( size_t count ) {
@@ -306,13 +308,14 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         //=== [IV] Modifiers
         void clear()  { 
             auto L = m_head->next;
-            while(L != m_tail) {
+            while (L != m_tail) {
                 auto target = L;
                 L = L->next;
                 delete target;
             }
             m_head->next = m_tail;
             m_tail->prev = m_head;
+            m_len = 0;
          }
         T front( void ) {
             if ( empty() ) {
@@ -345,7 +348,14 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
 
         void push_front( const T & value_ ) { /* TODO */ }
 
-        void push_back( const T & value_ ) { /* TODO */ }
+        void push_back( const T & value ) {
+            auto new_node {new Node{value}};
+            m_tail->prev->next = new_node;
+            new_node->prev = m_tail->prev;
+            new_node->next = m_tail;
+            m_tail->prev = new_node;
+            m_len++;
+        }
 
         void pop_front( ) { /* TODO */ }
 
