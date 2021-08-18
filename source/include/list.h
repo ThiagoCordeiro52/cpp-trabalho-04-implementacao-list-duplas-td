@@ -311,6 +311,8 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 L = L->next;
                 delete target;
             }
+            m_head->next = m_tail;
+            m_tail->prev = m_head;
          }
         T front( void ) {
             if ( empty() ) {
