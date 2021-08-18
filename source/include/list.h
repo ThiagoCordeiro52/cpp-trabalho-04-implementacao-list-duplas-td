@@ -424,7 +424,29 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         { /* TODO */ return iterator{}; }
 
         //=== [V] UTILITY METHODS
-        void merge( list & other ){ return; }
+        void merge( list & other ) {
+            auto curr1 {m_head->next};
+            
+            while (not other.empty()) {
+                auto curr2 {other.m_head->next};
+
+                if (curr1 == m_tail or curr2->data < curr1->data) {
+                    // Erase the curr value of the second list
+                    other.m_head->next = curr2->next;
+                    curr2->next->prev  = other.m_head;
+
+                    // Inserts the curr value of second list before the curr value of first list
+                    curr2->prev       = curr1->prev;
+                    curr2->prev->next = curr2;
+                    curr2->next       = curr1;
+                    curr2->next->prev = curr2;
+                } else
+                    curr1 = curr1->next;
+            }
+
+            m_len += other.m_len;
+            other.m_len = 0;
+        }
         void splice( const_iterator pos, list & other ){ return; }
         void reverse( void ){ return; }
         void unique( void ){ return; }

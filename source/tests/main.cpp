@@ -620,25 +620,25 @@ int main( void )
         EXPECT_EQ( 10, *it );
     }
 
-    // {
-    //     BEGIN_TEST(tm2, "cbegin","list.cbegin()");
+    {
+        BEGIN_TEST(tm2, "cbegin","list.cbegin()");
 
-    //     which_lib::list<int> list { 1, 2, 4, 5, 6 };
-    //     which_lib::list<int>::const_iterator cit = list.cbegin();
-    //     EXPECT_EQ( 1, *cit );
+        which_lib::list<int> list { 1, 2, 4, 5, 6 };
+        which_lib::list<int>::const_iterator cit = list.cbegin();
+        EXPECT_EQ( 1, *cit );
 
-    //     auto list2 = list;
-    //     cit = list2.cbegin();
-    //     EXPECT_EQ( 1, *cit );
+        auto list2 = list;
+        cit = list2.cbegin();
+        EXPECT_EQ( 1, *cit );
 
-    //     auto list3 = list;
-    //     cit = list3.cbegin();
-    //     EXPECT_EQ( 1, *cit );
+        auto list3 = list;
+        cit = list3.cbegin();
+        EXPECT_EQ( 1, *cit );
 
-    //     which_lib::list<int> list4 = { 10, 11, 12, 13, 14 };
-    //     cit = list4.cbegin();
-    //     EXPECT_EQ( 10, *cit );
-    // }
+        which_lib::list<int> list4 = { 10, 11, 12, 13, 14 };
+        cit = list4.cbegin();
+        EXPECT_EQ( 10, *cit );
+    }
 
     {
         BEGIN_TEST(tm2, "end","list.end()");
@@ -661,25 +661,25 @@ int main( void )
         EXPECT_EQ( it, list4.end() );
     }
 
-    // {
-    //     BEGIN_TEST(tm2, "cend","list.cend()");
+    {
+        BEGIN_TEST(tm2, "cend","list.cend()");
 
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5 };
-    //     which_lib::list<int>::const_iterator it = std::next(list.cbegin(), 5 );
-    //     EXPECT_EQ( it, list.cend() );
+        which_lib::list<int> list { 1, 2, 3, 4, 5 };
+        which_lib::list<int>::const_iterator it = std::next(list.cbegin(), 5 );
+        EXPECT_EQ( it, list.cend() );
 
-    //     auto list2 = list;
-    //     it = std::next( list2.cbegin(), 5 );
-    //     EXPECT_EQ( it, list2.cend() );
+        auto list2 = list;
+        it = std::next( list2.cbegin(), 5 );
+        EXPECT_EQ( it, list2.cend() );
 
-    //     auto list3 = list;
-    //     it = std::next( list3.cbegin(), 5 );
-    //     EXPECT_EQ( it, list3.cend() );
+        auto list3 = list;
+        it = std::next( list3.cbegin(), 5 );
+        EXPECT_EQ( it, list3.cend() );
 
-    //     which_lib::list<int> list4 = { 10, 11, 12, 13, 14 };
-    //     it = std::next( list4.cbegin(), 5 );
-    //     EXPECT_EQ( it, list4.cend() );
-    // }
+        which_lib::list<int> list4 = { 10, 11, 12, 13, 14 };
+        it = std::next( list4.cbegin(), 5 );
+        EXPECT_EQ( it, list4.cend() );
+    }
 
     {
         BEGIN_TEST(tm2, "operator++()","Preincrement, ++it");
@@ -755,66 +755,66 @@ int main( void )
     // 
     TestManager tm3{ "Utility Operations Test Suite"};
 
-    // {
-    //     BEGIN_TEST(tm3, "Merge 1","merging two interwoven regular sorted lists.");
-    //     which_lib::list<int> list_a{ 0, 1, 3, 5, 7, 9 };        // List A
-    //     which_lib::list<int> list_b{ 2, 4, 6, 8 };              // List B
-    //     which_lib::list<int> list_r{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }; // List Result
+    {
+        BEGIN_TEST(tm3, "Merge 1","merging two interwoven regular sorted lists.");
+        which_lib::list<int> list_a{ 0, 1, 3, 5, 7, 9 };        // List A
+        which_lib::list<int> list_b{ 2, 4, 6, 8 };              // List B
+        which_lib::list<int> list_r{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }; // List Result
 
-    //     list_a.merge( list_b ); // Merger B into A.
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Merge 2","merging two sequential regular sorted lists.");
-    //     which_lib::list<int> list_a{ 0, 1, 2, 3, 4, 5 };        // List A
-    //     which_lib::list<int> list_b{ 6, 7, 8, 9 };              // List B
-    //     which_lib::list<int> list_r{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }; // List Result
+        list_a.merge( list_b ); // Merger B into A.
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
+    }
+    {
+        BEGIN_TEST(tm3, "Merge 2","merging two sequential regular sorted lists.");
+        which_lib::list<int> list_a{ 0, 1, 2, 3, 4, 5 };        // List A
+        which_lib::list<int> list_b{ 6, 7, 8, 9 };              // List B
+        which_lib::list<int> list_r{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }; // List Result
 
-    //     list_a.merge( list_b ); // Merger B into A.
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Merge 3","merging two sequential (inverse) regular sorted lists.");
-    //     which_lib::list<int> list_a{ 4, 5, 6, 7, 8, 9 };        // List A
-    //     which_lib::list<int> list_b{ 0, 1, 2, 3 };              // List B
-    //     which_lib::list<int> list_r{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }; // List Result
+        list_a.merge( list_b ); // Merger B into A.
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
+    }
+    {
+        BEGIN_TEST(tm3, "Merge 3","merging two sequential (inverse) regular sorted lists.");
+        which_lib::list<int> list_a{ 4, 5, 6, 7, 8, 9 };        // List A
+        which_lib::list<int> list_b{ 0, 1, 2, 3 };              // List B
+        which_lib::list<int> list_r{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }; // List Result
 
-    //     list_a.merge( list_b ); // Merger B into A.
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Merge 4","merging an empty list into a sorted list.");
-    //     which_lib::list<int> list_a;        // List A
-    //     which_lib::list<int> list_b{ 0, 1, 2, 3 };              // List B
-    //     which_lib::list<int> list_r{ 0, 1, 2, 3 }; // List Result
+        list_a.merge( list_b ); // Merger B into A.
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
+    }
+    {
+        BEGIN_TEST(tm3, "Merge 4","merging an empty list into a sorted list.");
+        which_lib::list<int> list_a;        // List A
+        which_lib::list<int> list_b{ 0, 1, 2, 3 };              // List B
+        which_lib::list<int> list_r{ 0, 1, 2, 3 }; // List Result
 
-    //     list_a.merge( list_b ); // Merger B into A.
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Merge 5","merging a sorted list into an empty list.");
-    //     which_lib::list<int> list_a;        // List A
-    //     which_lib::list<int> list_b{ 0, 1, 2, 3 };              // List B
-    //     which_lib::list<int> list_r{ 0, 1, 2, 3 }; // List Result
+        list_a.merge( list_b ); // Merger B into A.
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
+    }
+    {
+        BEGIN_TEST(tm3, "Merge 5","merging a sorted list into an empty list.");
+        which_lib::list<int> list_a;        // List A
+        which_lib::list<int> list_b{ 0, 1, 2, 3 };              // List B
+        which_lib::list<int> list_r{ 0, 1, 2, 3 }; // List Result
 
-    //     list_a.merge( list_b ); // Merger B into A.
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Merge 6","merging sorted list with same value.");
-    //     which_lib::list<int> list_a{ 1, 1, 1 };        // List A
-    //     which_lib::list<int> list_b{ 1, 1, 1, 1 };              // List B
-    //     which_lib::list<int> list_r{ 1, 1, 1, 1, 1, 1, 1 }; // List Result
+        list_a.merge( list_b ); // Merger B into A.
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
+    }
+    {
+        BEGIN_TEST(tm3, "Merge 6","merging sorted list with same value.");
+        which_lib::list<int> list_a{ 1, 1, 1 };        // List A
+        which_lib::list<int> list_b{ 1, 1, 1, 1 };              // List B
+        which_lib::list<int> list_r{ 1, 1, 1, 1, 1, 1, 1 }; // List Result
 
-    //     list_a.merge( list_b ); // Merger B into A.
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
-    // }
+        list_a.merge( list_b ); // Merger B into A.
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        EXPECT_TRUE( list_b.empty() ); // List B must be empty (all nodes moved to A).
+    }
 
     // {
     //     BEGIN_TEST(tm3, "Splice 1","splicing at the beginning.");

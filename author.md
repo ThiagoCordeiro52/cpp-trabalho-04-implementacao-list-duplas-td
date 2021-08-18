@@ -53,7 +53,7 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 - [ ] `erase(range)` (3 credits)
 
 **Utility methods (40 credits)**
-- [ ] `merge(other)` (8 credits)
+- [X] `merge(other)` (8 credits)
 - [ ] `splice(pos,other)` (8 credits)
 - [ ] `reverse()` (8 credits)
 - [ ] `unique()` (8 credits)
