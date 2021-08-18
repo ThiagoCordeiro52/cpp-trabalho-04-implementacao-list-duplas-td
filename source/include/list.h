@@ -286,17 +286,42 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
          }
         size_t size(void) const { /* TODO */  return 0; }
         //=== [IV] Modifiers
-        void clear()  { /* TODO */ }
+        void clear()  { 
+            auto L = m_head->next;
+            while(L != m_tail) {
+                auto target = L;
+                L = L->next;
+                delete target;
+            }
+         }
         T front( void ) {
             if ( empty() ) {
                throw std::out_of_range("front(): cannot use the front method on an empty list.");
             }
-            auto element = m_head->next(); 
+            auto element = m_head->next; 
             return T{element->data}; 
         }
-        T front( void ) const  { /* TODO */ return T{}; }
-        T back( void ) { /* TODO */ return T{}; }
-        T back( void ) const  { /* TODO */ return T{}; }
+        T front( void ) const  { 
+            if ( empty() ) {
+               throw std::out_of_range("front(): cannot use the front method on an empty list.");
+            }
+            auto element = m_head->next; 
+            return T{element->data}; 
+        }
+        T back( void ) {             
+            if ( empty() ) {
+               throw std::out_of_range("back(): cannot use the back method on an empty list.");
+            }
+            auto element = m_tail->prev; 
+            return T{element->data};  
+        }
+        T back( void ) const  { 
+            if ( empty() ) {
+               throw std::out_of_range("back(): cannot use the back method on an empty list.");
+            }
+            auto element = m_tail->prev; 
+            return T{element->data};  
+         }
 
         void push_front( const T & value_ ) { /* TODO */ }
 
