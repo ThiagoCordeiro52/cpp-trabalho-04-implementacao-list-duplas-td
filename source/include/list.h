@@ -414,7 +414,11 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 m_tail->prev = prev;
             }
 
-            ~list() { /* TODO */ }
+            ~list() { 
+                clear(); 
+                delete m_head;
+                delete m_tail;
+             }
 
             // TODO (davi): maybe change to use erase insted of first while
             list & operator=( const list & rhs ) {
@@ -433,7 +437,21 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 return *this;
             }
 
-            list & operator=( std::initializer_list<T> ilist_ ) { /* TODO */ return *this;}
+            list & operator=( std::initializer_list<T> ilist ) {  
+                // Ensure the size this lsit is not greater than the other, liberating memory if necessary
+                while (m_len > ilist.size())
+                    pop_back();
+
+                // Puts all the values this values this list can hold right now
+                auto last {std::next(ilist.begin(), m_len)};
+                std::copy(ilist.begin(), last, begin());
+
+                // Pushs the remaing valeus to the end of list
+                for (auto it {last}; it != ilist.end(); it++)
+                    push_back(*it);
+
+                return *this;
+            }
 
             //=== [II] ITERATORS
             /**
