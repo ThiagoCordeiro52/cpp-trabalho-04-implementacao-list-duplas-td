@@ -23,17 +23,17 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 **Iterator methods (4 credits)**
 - [X] `begin()` (1 credits)
 - [X] `end()` (1 credits)
-- [ ] `cbegin()` (1 credits)
-- [ ] `cend()` (1 credits)
+- [X] `cbegin()` (1 credits)
+- [X] `cend()` (1 credits)
 
 **Access operations (6 credits)**
-- [ ] `empty()` (1 credits);
+- [X] `empty()` (1 credits);
 - [X] `size()` (1 credits);
-- [ ] `front()` (2 credits);
-- [ ] `back()` (2 credits);
+- [X] `front()` (2 credits);
+- [X] `back()` (2 credits);
 
 **Modifiers methods (21 credits)**
-- [ ] `clear()` (1 credits)
+- [X] `clear()` (1 credits)
 - [ ] `push_front()` (3 credits)
 - [ ] `push_back()` (3 credits)
 - [ ] `pop_front()` (3 credits)
@@ -68,9 +68,9 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 
 **Navigation methods (7 credits)**
 - [X] increment operator `++it` and `it++` (2 credits)
-- [ ] decrement operator `--it` and `it--` (2 credits)
+- [X] decrement operator `--it` and `it--` (2 credits)
 - [X] dereference operator `*it` (1 credits)
-- [ ] equality/difference operators `it1==it2` and `it1!=it2` (2 credits)
+- [X] equality/difference operators `it1==it2` and `it1!=it2` (2 credits)
 
 --------
 &copy; DIMAp/UFRN 2021.
