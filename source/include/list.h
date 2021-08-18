@@ -262,17 +262,28 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
         iterator begin() {
             return iterator{m_head->next};
         }
-        const_iterator cbegin() const  { /* TODO */ return const_iterator{}; }
+        const_iterator cbegin() const  { 
+            return const_iterator{m_head->next}; }
         iterator end() {
             return iterator{m_tail};
         }
-        const_iterator cend() const  { /* TODO */ return const_iterator{}; }
+        const_iterator cend() const  { 
+            return const_iterator{m_tail}; 
+        }
         //=== [III] Capacity/Status
-        bool empty ( void ) const { /* TODO */  return true; }
+        bool empty ( void ) const { 
+            return m_head->next == m_tail;
+         }
         size_t size(void) const { /* TODO */  return 0; }
         //=== [IV] Modifiers
         void clear()  { /* TODO */ }
-        T front( void ) { /* TODO */ return T{}; }
+        T front( void ) {
+            if ( empty() ) {
+               throw std::out_of_range("front(): cannot use the front method on an empty list.");
+            }
+            auto element = m_head->next(); 
+            return T{element->data}; 
+        }
         T front( void ) const  { /* TODO */ return T{}; }
         T back( void ) { /* TODO */ return T{}; }
         T back( void ) const  { /* TODO */ return T{}; }
