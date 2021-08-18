@@ -60,29 +60,29 @@ int main( void )
             EXPECT_EQ( i+1, *it++ );
     }   
 
-    // {
-    //     BEGIN_TEST(tm,"RangeConstructor", "checking constructors with a range of values");
-    //     // Range = the entire list.
-    //     which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> list2( list.begin(), list.end() );
+    {
+        BEGIN_TEST(tm,"RangeConstructor", "checking constructors with a range of values");
+        // Range = the entire list.
+        which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+        which_lib::list<int> list2( list.begin(), list.end() );
 
-    //     EXPECT_EQ( list2.size(), 5 );
-    //     EXPECT_FALSE( list.empty() );
+        EXPECT_EQ( list2.size(), 5 );
+        EXPECT_FALSE( list.empty() );
 
-    //     // recover elements to test
-    //     auto i{1};
-    //     for( auto e : list2)
-    //         EXPECT_EQ( e, i++ );
+        // recover elements to test
+        auto i{1};
+        for( auto e : list2)
+            EXPECT_EQ( e, i++ );
 
-    //     // Copy only part of the original range.
-    //     which_lib::list<int> list3( std::next( list.begin(), 1 ), std::next( list.begin(), 3 ) );
-    //     EXPECT_EQ( list3.size(), 2 );
-    //     EXPECT_FALSE( list3.empty() );
+        // Copy only part of the original range.
+        which_lib::list<int> list3( std::next( list.begin(), 1 ), std::next( list.begin(), 3 ) );
+        EXPECT_EQ( list3.size(), 2 );
+        EXPECT_FALSE( list3.empty() );
 
-    //     auto it2 = std::next( list.begin(), 1 );
-    //     for (auto it = list3.begin() ; it != list3.end() ; ++it, ++it2 )
-    //         EXPECT_EQ( *it, *it2 );
-    // }
+        auto it2 = std::next( list.begin(), 1 );
+        for (auto it = list3.begin() ; it != list3.end() ; ++it, ++it2 )
+            EXPECT_EQ( *it, *it2 );
+    }
 
     {
         BEGIN_TEST(tm, "CopyConstructor","constructor copy values of another list.");
@@ -192,41 +192,41 @@ int main( void )
         EXPECT_TRUE( list.empty() );
     }
 
-    // {
-    //     BEGIN_TEST(tm, "PushFront","PushFront");
-    //     // #1 From an empty list.
-    //     which_lib::list<int> list;
+    {
+        BEGIN_TEST(tm, "PushFront","PushFront");
+        // #1 From an empty list.
+        which_lib::list<int> list;
 
-    //     EXPECT_TRUE( list.empty() );
-    //     for ( auto i{0} ; i < 5 ; ++i )
-    //     {
-    //         list.push_front( i+1 );
-    //         EXPECT_EQ( list.size(),  i+1 );
-    //     }
-    //     EXPECT_FALSE( list.empty() );
+        EXPECT_TRUE( list.empty() );
+        for ( auto i{0} ; i < 5 ; ++i )
+        {
+            list.push_front( i+1 );
+            EXPECT_EQ( list.size(),  i+1 );
+        }
+        EXPECT_FALSE( list.empty() );
 
-    //     auto i{5};
-    //     for ( const auto & e: list )
-    //         EXPECT_EQ( e , i-- );
+        auto i{5};
+        for ( const auto & e: list )
+            EXPECT_EQ( e , i-- );
 
 
-    //     // REmove all elements.
-    //     list.clear();
-    //     EXPECT_TRUE(list.empty()  );
-    //     for ( auto i{0u} ; i < 5 ; ++i )
-    //     {
-    //         list.push_front( i+1 );
-    //         EXPECT_EQ( list.size(),  i+1 );
-    //     }
-    //     EXPECT_FALSE( list.empty() );
+        // REmove all elements.
+        list.clear();
+        EXPECT_TRUE(list.empty()  );
+        for ( auto i{0u} ; i < 5 ; ++i )
+        {
+            list.push_front( i+1 );
+            EXPECT_EQ( list.size(),  i+1 );
+        }
+        EXPECT_FALSE( list.empty() );
 
-    //     i = 5;
-    //     for ( const auto & e: list )
-    //     {
-    //         EXPECT_EQ( e , i-- );
-    //     }
+        i = 5;
+        for ( const auto & e: list )
+        {
+            EXPECT_EQ( e , i-- );
+        }
 
-    // }
+    }
 
 
     {
@@ -261,20 +261,20 @@ int main( void )
             EXPECT_EQ( e , ++i );
     }
 
-    // {
-    //     BEGIN_TEST(tm, "PopBack", "PopBack");
-    //     // #1 From an empty list.
-    //     which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+    {
+        BEGIN_TEST(tm, "PopBack", "PopBack");
+        // #1 From an empty list.
+        which_lib::list<int> list{ 1, 2, 3, 4, 5 };
 
-    //     while( not list.empty() )
-    //     {
-    //         list.pop_back();
-    //         // Checke whether we have the same list except for the last.
-    //         auto i {0};
-    //         for ( const auto & e: list )
-    //             EXPECT_EQ( e , ++i );
-    //     }
-    // }
+        while( not list.empty() )
+        {
+            list.pop_back();
+            // Checke whether we have the same list except for the last.
+            auto i {0};
+            for ( const auto & e: list )
+                EXPECT_EQ( e , ++i );
+        }
+    }
 
     {
         BEGIN_TEST(tm, "PopFront", "PopFront");
@@ -294,30 +294,30 @@ int main( void )
     }
 
 
-    {
-        BEGIN_TEST(tm, "Front", "front");
-        // #1 From an empty list.
-        which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+    // {
+    //     BEGIN_TEST(tm, "Front", "front");
+    //     // #1 From an empty list.
+    //     which_lib::list<int> list{ 1, 2, 3, 4, 5 };
 
-        auto i{0};
-        while( not list.empty() )
-        {
-            auto current_size = list.size();
-            EXPECT_EQ( list.front(), ++i );
-            EXPECT_EQ( current_size, list.size() );
-            list.pop_front();
-        }
-    }
+    //     auto i{0};
+    //     while( not list.empty() )
+    //     {
+    //         auto current_size = list.size();
+    //         EXPECT_EQ( list.front(), ++i );
+    //         EXPECT_EQ( current_size, list.size() );
+    //         list.pop_front();
+    //     }
+    // }
 
-    {
-        BEGIN_TEST(tm, "FrontConst","FrontConst");
-        // #1 From an empty list.
-        const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-        EXPECT_EQ( list.front(), 1 );
+    // {
+    //     BEGIN_TEST(tm, "FrontConst","FrontConst");
+    //     // #1 From an empty list.
+    //     const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+    //     EXPECT_EQ( list.front(), 1 );
 
-        const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
-        EXPECT_EQ( list2.front(), 'a' );
-    }
+    //     const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
+    //     EXPECT_EQ( list2.front(), 'a' );
+    // }
 
 
     // {
@@ -336,15 +336,15 @@ int main( void )
     // }
 
 
-    {
-        BEGIN_TEST(tm, "BackConst","BackConst");
-        // #1 From an empty list.
-        const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
-        EXPECT_EQ( list.back(), 5 );
+    // {
+    //     BEGIN_TEST(tm, "BackConst","BackConst");
+    //     // #1 From an empty list.
+    //     const which_lib::list<int> list{ 1, 2, 3, 4, 5 };
+    //     EXPECT_EQ( list.back(), 5 );
 
-        const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
-        EXPECT_EQ( list2.back(), 'u' );
-    }
+    //     const which_lib::list<char> list2{ 'a', 'e', 'i', 'o', 'u' };
+    //     EXPECT_EQ( list2.back(), 'u' );
+    // }
 
 
 

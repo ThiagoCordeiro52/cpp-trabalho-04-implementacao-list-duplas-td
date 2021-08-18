@@ -364,7 +364,21 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             }
 
             template< typename InputIt >
-            list( InputIt first, InputIt last ) { /* TODO */ }
+            list( InputIt first, InputIt last ) 
+                : m_len{(size_t)std::distance(first,last)}, 
+                m_head{new Node}, 
+                m_tail{new Node}
+                {
+                    auto prev = m_head;
+                    for (auto it {first}; it != last; it++) {
+                        auto curr {new Node{*it}};
+                        prev->next = curr;
+                        curr->prev = prev;
+                        prev = curr;
+                    }
+                    prev->next = m_tail;
+                    m_tail->prev = prev;
+            }
 
             /**
              * @brief Creates a list with the values of clone
@@ -511,17 +525,9 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 return m_tail->prev->data;
             }
 
-            /**
-             * @return the last value on the list
-             */
-            T back( void ) const  { 
-                if ( empty() )
-                    throw std::out_of_range("back(): cannot use the back method on an empty list.");
-
-                return m_tail->prev->data;
+            void push_front( const T & value ) { 
+                insert(begin(), value);
             }
-
-            void push_front( const T & value_ ) { /* TODO */ }
 
             /**
              * @brief Add a value to the end of the list
@@ -543,10 +549,17 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 m_head->next = m_head->next->next;
                 m_head->next->prev = m_head;
                 delete L;
+                m_len--;
             }
 
             // TODO (thiago): FIX THIS
-            void pop_back() { 
+            void pop_back() {
+                if ( empty() )
+                    throw std::out_of_range("pop_back(): cannot use the back method on an empty list."); 
+                auto L {m_tail->prev};
+                m_tail->prev = m_tail->prev->prev;
+                m_tail->prev->next = m_tail;
+                delete L;
                 m_len--;
             }
 

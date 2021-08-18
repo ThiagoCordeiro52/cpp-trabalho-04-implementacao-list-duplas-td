@@ -6,6 +6,10 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 - Email: *jose.davi@imd.ufrn.br*
 - Turma: *<insira sua turma aqui>*
 
+- Nome: *Thiago de Oliveira Cordeiro*
+- Email: *thiagoty52@gmail.com*
+- Turma: *<insira sua turma aqui>*
+
 # Indique quais métodos das classes abaixo foram implementados
 
 ## Implementação de List
@@ -15,7 +19,7 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 - [X] Constructor size (3 credits)
 - [ ] Destructor (3 credits)
 - [X] Copy constructor (3 credits)
-- [ ] Constructor from range (3 credits)
+- [X] Constructor from range (3 credits)
 - [X] Constructor from initialize list (2 credits)
 - [X] Assignment operator `operator=(list)` (2 credits)
 - [ ] Assignment operator `operator=(initializer list)` (2 credits)
@@ -34,10 +38,10 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 
 **Modifiers methods (21 credits)**
 - [X] `clear()` (1 credits)
-- [ ] `push_front()` (3 credits)
+- [X] `push_front()` (3 credits)
 - [X] `push_back()` (3 credits)
 - [X] `pop_front()` (3 credits)
-- [ ] `pop_back()` (3 credits)
+- [X] `pop_back()` (3 credits)
 - [ ] `assign(range)` (3 credits)
 - [ ] `assign(initializer list)` (3 credits)
 
