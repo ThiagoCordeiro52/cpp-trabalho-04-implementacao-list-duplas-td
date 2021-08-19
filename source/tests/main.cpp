@@ -923,56 +923,56 @@ int main( void )
     }
 
 
-    // {
-    //     BEGIN_TEST(tm3, "Unique 1", "unique on a regular list.");
-    //     which_lib::list<int> list_a{ 1, 2, 2, 3, 3, 2, 1, 1, 2 };              // List B
-    //     which_lib::list<int> list_r{ 1, 2, 3, 2, 1, 2 }; // List Result
+    {
+        BEGIN_TEST(tm3, "Unique 1", "unique on a regular list.");
+        which_lib::list<int> list_a{ 1, 2, 2, 3, 3, 2, 1, 1, 2 };              // List B
+        which_lib::list<int> list_r{ 1, 2, 3, 2, 1, 2 }; // List Result
 
-    //     list_a.unique();
-    //     auto add_first{ list_a.begin() };
-    //     auto add_last{ std::prev( list_a.end() ) };
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     // Make sure no new node has been created.
-    //     *add_first = 10; // Iterators must remain valid.
-    //     *add_last = 20;
-    //     which_lib::list<int> list_r2{ 10, 2, 3, 2, 1, 20 }; // List Result
-    //     EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
-    // }
+        list_a.unique();
+        auto add_first{ list_a.begin() };
+        auto add_last{ std::prev( list_a.end() ) };
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        // Make sure no new node has been created.
+        *add_first = 10; // Iterators must remain valid.
+        *add_last = 20;
+        which_lib::list<int> list_r2{ 10, 2, 3, 2, 1, 20 }; // List Result
+        EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
+    }
 
-    // {
-    //     BEGIN_TEST(tm3, "Unique 2", "all equal to a single value.");
-    //     which_lib::list<int> list_a{ 1, 1, 1, 1, 1 };              // List B
-    //     which_lib::list<int> list_r{ 1 }; // List Result
+    {
+        BEGIN_TEST(tm3, "Unique 2", "all equal to a single value.");
+        which_lib::list<int> list_a{ 1, 1, 1, 1, 1 };              // List B
+        which_lib::list<int> list_r{ 1 }; // List Result
 
-    //     list_a.unique();
-    //     auto add_first{ list_a.begin() };
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     // Make sure no new node has been created.
-    //     *add_first = 10; // Iterators must remain valid.
-    //     which_lib::list<int> list_r2{ 10}; // List Result
-    //     EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Unique 3", "list have already only unique elements.");
-    //     which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
-    //     which_lib::list<int> list_r{ 1, 2, 3, 4, 5 }; // List Result
+        list_a.unique();
+        auto add_first{ list_a.begin() };
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        // Make sure no new node has been created.
+        *add_first = 10; // Iterators must remain valid.
+        which_lib::list<int> list_r2{ 10}; // List Result
+        EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
+    }
+    {
+        BEGIN_TEST(tm3, "Unique 3", "list have already only unique elements.");
+        which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
+        which_lib::list<int> list_r{ 1, 2, 3, 4, 5 }; // List Result
 
-    //     list_a.unique();
-    //     auto add_first{ list_a.begin() };
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     // Make sure no new node has been created.
-    //     *add_first = 10; // Iterators must remain valid.
-    //     which_lib::list<int> list_r2{ 10, 2, 3, 4, 5}; // List Result
-    //     EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Unique 4", "unique on an empty list.");
-    //     which_lib::list<int> list_a{ };              // List B
-    //     which_lib::list<int> list_r{ }; // List Result
+        list_a.unique();
+        auto add_first{ list_a.begin() };
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        // Make sure no new node has been created.
+        *add_first = 10; // Iterators must remain valid.
+        which_lib::list<int> list_r2{ 10, 2, 3, 4, 5}; // List Result
+        EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
+    }
+    {
+        BEGIN_TEST(tm3, "Unique 4", "unique on an empty list.");
+        which_lib::list<int> list_a{ };              // List B
+        which_lib::list<int> list_r{ }; // List Result
 
-    //     list_a.unique();
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    // }
+        list_a.unique();
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+    }
 
     // {
     //     BEGIN_TEST(tm3, "Sort 1", "sorting a regular list.");

@@ -745,7 +745,22 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 std::swap(m_head, m_tail);
             }
 
-            void unique( void ){ return; }
+            void unique( void ){ 
+                auto first {m_head->next};
+                auto last {m_head->next->next};
+                while(last != nullptr) {
+                    if(first->data == last->data) {
+                        auto target = last;
+                        last = last->next;
+                        first->next = last;
+                        delete target;
+                        m_len--;
+                    } else {
+                        first = first->next;
+                        last = last->next;
+                    }
+                }
+            }
 
             void sort( void ){ return; }
     };

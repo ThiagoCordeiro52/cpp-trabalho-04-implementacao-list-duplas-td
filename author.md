@@ -52,14 +52,14 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 **Methods that require iterators (19 credits)**
 - [X] `insert(iterator,value)` (4 credits)
 - [X] `insert(iterator,range)` (4 credits)
-- [ ] `insert(iterator,initializer list)` (4 credits)
+- [X] `insert(iterator,initializer list)` (4 credits)
 - [ ] `erase(iterator)` (3 credits)
 - [ ] `erase(range)` (3 credits)
 
 **Utility methods (40 credits)**
 - [X] `merge(other)` (8 credits)
 - [X] `splice(pos,other)` (8 credits)
-- [ ] `reverse()` (8 credits)
+- [X] `reverse()` (8 credits)
 - [ ] `unique()` (8 credits)
 - [ ] `sort()` (8 credits)
 
