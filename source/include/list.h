@@ -648,8 +648,7 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 return pos;
             }
 
-            iterator insert( iterator cpos, std::initializer_list<T> ilist )
-            { 
+            iterator insert( iterator cpos, std::initializer_list<T> ilist ) { 
                 for (auto it {ilist.end()}; it != ilist.begin(); it--)
                     cpos = insert(cpos, *std::prev(it));
                 return cpos;
@@ -712,19 +711,18 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
              * @param other the other list
              */
             void splice( const_iterator pos, list & other ) {
-                // Goes through other list
-                while (not other.empty()) {
-                    auto curr {other.m_head->next};
-                    // Remove curr value of other list
-                    other.m_head->next = curr->next;
-                    curr->next->prev  = other.m_head;
+                // Links the first element of other after the element befere pos
+                pos.m_ptr->prev->next = other.m_head->next;
+                other.m_head->next->prev = pos.m_ptr->prev;
 
-                    // Adds curr value to this list
-                    curr->prev       = pos.m_ptr->prev;
-                    curr->prev->next = curr;
-                    curr->next       = pos.m_ptr;
-                    curr->next->prev = curr;
-                }
+                // Links the last element of other befere pos
+                pos.m_ptr->prev = other.m_tail->prev;
+                other.m_tail->prev->next = pos.m_ptr;
+
+                // Sets other as empty
+                other.m_head->next = other.m_tail;
+                other.m_tail->prev = other.m_head; 
+
                 m_len += other.m_len;
                 other.m_len = 0;
             }
