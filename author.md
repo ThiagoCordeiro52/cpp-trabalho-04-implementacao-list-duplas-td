@@ -53,22 +53,22 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
 - [X] `insert(iterator,value)` (4 credits)
 - [X] `insert(iterator,range)` (4 credits)
 - [X] `insert(iterator,initializer list)` (4 credits)
-- [ ] `erase(iterator)` (3 credits)
-- [ ] `erase(range)` (3 credits)
+- [X] `erase(iterator)` (3 credits)
+- [X] `erase(range)` (3 credits)
 
 **Utility methods (40 credits)**
 - [X] `merge(other)` (8 credits)
 - [X] `splice(pos,other)` (8 credits)
 - [X] `reverse()` (8 credits)
-- [ ] `unique()` (8 credits)
+- [X] `unique()` (8 credits)
 - [ ] `sort()` (8 credits)
 
 ## Implementação do Iterator
 
 **Special members (3 credits)**
 - [X] Regular constructor (1 credits)
-- [ ] Copy constructor (1 credits)
-- [ ] Assignment operator (1 credits)
+- [X] Copy constructor (1 credits)
+- [X] Assignment operator (1 credits)
 
 **Navigation methods (7 credits)**
 - [X] increment operator `++it` and `it++` (2 credits)

@@ -658,15 +658,34 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
              *  Erases the node pointed by 'it_' and returns an iterator
              *  to the node just past the deleted node.
              *
-             *  \param it_ The node we wish to delete.
+             *  \param it The node we wish to delete.
              *  \return An iterator to the node following the deleted node.
              */
-            iterator erase( iterator it_ )
-            { /* TODO */ return iterator{}; }
+            iterator erase( iterator it )
+            {
+                auto element{m_head->next};
+                while(element != nullptr) {
+                    std::cout << "\n\nEPA\n\n";
+                    if(it == element) {
+                        element->prev->next = element->next;
+                        delete element;
+                        break;
+                    }
+                    element = element->next;
+                } 
+                return it; 
+            }
 
             // Erase items from [start; end) and return a iterator just past the deleted node.
             iterator erase( iterator start, iterator end )
-            { /* TODO */ return iterator{}; }
+            { 
+                auto element {start};
+                while(start != end) {
+                    erase(start);
+                    start++;
+                }
+                return element;
+            }
 
             const_iterator find( const T & value_ ) const
             { /* TODO */ return const_iterator{}; }

@@ -162,20 +162,20 @@ int main( void )
 //#endif
 
 
-    // {
-    //     BEGIN_TEST(tm, "ListInitializerAssign","initializer list assignment");
-    //     // Range = the entire list.
-    //     which_lib::list<int> list;
-    //     list = { 1, 2, 3, 4, 5 };
+    {
+        BEGIN_TEST(tm, "ListInitializerAssign","initializer list assignment");
+        // Range = the entire list.
+        which_lib::list<int> list;
+        list = { 1, 2, 3, 4, 5 };
 
-    //     EXPECT_EQ( list.size(), 5 );
-    //     EXPECT_FALSE( list.empty() );
+        EXPECT_EQ( list.size(), 5 );
+        EXPECT_FALSE( list.empty() );
 
-    //     // recover elements to test.
-    //     auto i{1};
-    //     for( auto e : list )
-    //         EXPECT_EQ ( e, i++ );
-    // }
+        // recover elements to test.
+        auto i{1};
+        for( auto e : list )
+            EXPECT_EQ ( e, i++ );
+    }
 
 
     {
@@ -453,32 +453,32 @@ int main( void )
     }
 
 
-    // {
-    //     BEGIN_TEST(tm, "InsertInitializarList","InsertInitializarList");
-    //     // Aux arrays.
-    //     which_lib::list<int> list1 { 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> list2 { 1, 2, 3, 4, 5 };
-    //     which_lib::list<int> source { 6, 7, 8, 9, 10 };
+    {
+        BEGIN_TEST(tm, "InsertInitializarList","InsertInitializarList");
+        // Aux arrays.
+        which_lib::list<int> list1 { 1, 2, 3, 4, 5 };
+        which_lib::list<int> list2 { 1, 2, 3, 4, 5 };
+        which_lib::list<int> source { 6, 7, 8, 9, 10 };
 
-    //     // Inset at the beginning.
-    //     list1.insert( list1.begin(), { 6, 7, 8, 9, 10 } );
-    //     EXPECT_EQ( list1 , ( which_lib::list<int>{ 6, 7, 8, 9, 10, 1, 2, 3, 4, 5 } ) );
+        // Inset at the beginning.
+        list1.insert( list1.begin(), { 6, 7, 8, 9, 10 } );
+        EXPECT_EQ( list1 , ( which_lib::list<int>{ 6, 7, 8, 9, 10, 1, 2, 3, 4, 5 } ) );
 
-    //     // In the middle
-    //     list1 = list2;
-    //     list1.insert( std::next( list1.begin(), 2 ), { 6, 7, 8, 9, 10 } );
-    //     EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 6, 7, 8, 9, 10, 3, 4, 5 } ) );
+        // In the middle
+        list1 = list2;
+        list1.insert( std::next( list1.begin(), 2 ), { 6, 7, 8, 9, 10 } );
+        EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 6, 7, 8, 9, 10, 3, 4, 5 } ) );
 
-    //     // At the end
-    //     list1 = list2;
-    //     list1.insert( list1.end(), { 6, 7, 8, 9, 10 } );
-    //     EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } ) );
+        // At the end
+        list1 = list2;
+        list1.insert( list1.end(), { 6, 7, 8, 9, 10 } );
+        EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } ) );
 
-    //     // // Outside
-    //     // list1 = list2;
-    //     // list1.insert( std::next( list1.end(), 2 ) , { 6, 7, 8, 9, 10 } );
-    //     // EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5 } ) );
-    // }
+        // // Outside
+        // list1 = list2;
+        // list1.insert( std::next( list1.end(), 2 ) , { 6, 7, 8, 9, 10 } );
+        // EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5 } ) );
+    }
 
 
     // // // {
@@ -510,67 +510,67 @@ int main( void )
     // // // }
 
 
-    // {
-    //     BEGIN_TEST(tm, "EraseRange","EraseRange");
-    //     // Initial list.
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5 };
+    {
+        BEGIN_TEST(tm, "EraseRange","EraseRange");
+        // Initial list.
+        which_lib::list<int> list { 1, 2, 3, 4, 5 };
 
-    //     // removing a segment from the beginning.
-    //     auto past_last = list.erase( list.begin(), std::next(list.begin(),3) );
-    //     EXPECT_EQ( list.begin() , past_last );
-    //     EXPECT_EQ( list , ( which_lib::list<int>{ 4, 5 } ) );
-    //     EXPECT_EQ( list.size() , 2 );
+        // removing a segment from the beginning.
+        auto past_last = list.erase( list.begin(), std::next(list.begin(),3) );
+        EXPECT_EQ( list.begin() , past_last );
+        EXPECT_EQ( list , ( which_lib::list<int>{ 4, 5 } ) );
+        EXPECT_EQ( list.size() , 2 );
 
-    //     // removing at the middle.
-    //     list = { 1, 2, 3, 4, 5 };
-    //     past_last = list.erase( std::next(list.begin(),1), std::next(list.begin(),4) );
-    //     EXPECT_EQ( std::next(list.begin(),1) , past_last );
-    //     EXPECT_EQ( list , ( which_lib::list<int>{ 1, 5 } ) );
-    //     EXPECT_EQ( list.size() , 2 );
+        // removing at the middle.
+        list = { 1, 2, 3, 4, 5 };
+        past_last = list.erase( std::next(list.begin(),1), std::next(list.begin(),4) );
+        EXPECT_EQ( std::next(list.begin(),1) , past_last );
+        EXPECT_EQ( list , ( which_lib::list<int>{ 1, 5 } ) );
+        EXPECT_EQ( list.size() , 2 );
 
-    //     // removing a segment that reached the end.
-    //     list = { 1, 2, 3, 4, 5 };
-    //     past_last = list.erase( std::next(list.begin(),2), list.end() );
-    //     EXPECT_EQ( list.end() , past_last );
+        // removing a segment that reached the end.
+        list = { 1, 2, 3, 4, 5 };
+        past_last = list.erase( std::next(list.begin(),2), list.end() );
+        EXPECT_EQ( list.end() , past_last );
 
-    //     EXPECT_EQ( list , ( which_lib::list<int>{ 1, 2 } ) );
-    //     EXPECT_EQ( list.size() , 2 );
-    //     // removing the entire list.
-    //     list = { 1, 2, 3, 4, 5 };
-    //     past_last = list.erase( list.begin(), list.end() );
-    //     EXPECT_EQ( list.end() , past_last );
-    //     EXPECT_TRUE( list.empty() );
-    // }
+        EXPECT_EQ( list , ( which_lib::list<int>{ 1, 2 } ) );
+        EXPECT_EQ( list.size() , 2 );
+        // removing the entire list.
+        list = { 1, 2, 3, 4, 5 };
+        past_last = list.erase( list.begin(), list.end() );
+        EXPECT_EQ( list.end() , past_last );
+        EXPECT_TRUE( list.empty() );
+    }
 
 
-    // {
-    //     BEGIN_TEST(tm, "ErasePos","ErasePos");
-    //     // Initial list.
-    //     which_lib::list<int> list { 1, 2, 3, 4, 5 };
+    {
+        BEGIN_TEST(tm, "ErasePos","ErasePos");
+        // Initial list.
+        which_lib::list<int> list { 1, 2, 3, 4, 5 };
 
-    //     // removing a single element.
-    //     list = { 1, 2, 3, 4, 5 };
-    //     auto past_last = list.erase( list.begin() );
-    //     EXPECT_EQ( list , ( which_lib::list<int>{ 2, 3, 4, 5 } ) );
-    //     EXPECT_EQ( list.begin() , past_last );
-    //     EXPECT_EQ( list.size() , 4 );
+        // removing a single element.
+        list = { 1, 2, 3, 4, 5 };
+        auto past_last = list.erase( list.begin() );
+        EXPECT_EQ( list , ( which_lib::list<int>{ 2, 3, 4, 5 } ) );
+        EXPECT_EQ( list.begin() , past_last );
+        EXPECT_EQ( list.size() , 4 );
 
-    //     // removing a single element in the middle.
-    //     list = { 1, 2, 3, 4, 5 };
-//past// _last = list.erase( std::next(list.begin(),2) );
-    //     EXPECT_EQ( list , ( which_lib::list<int>{ 1, 2, 4, 5 } ) );
+        // removing a single element in the middle.
+        list = { 1, 2, 3, 4, 5 };
+        past_last = list.erase( std::next(list.begin(),2) );
+        EXPECT_EQ( list , ( which_lib::list<int>{ 1, 2, 4, 5 } ) );
 
-    //     std::cout << " \n";
-    //     EXPECT_EQ( std::next(list.begin(),2) , past_last );
-    //     EXPECT_EQ( list.size() , 4 );
+        std::cout << " \n";
+        EXPECT_EQ( std::next(list.begin(),2) , past_last );
+        EXPECT_EQ( list.size() , 4 );
 
-    //     // removing a single element at the end.
-    //     list = { 1, 2, 3, 4, 5 };
-    //     past_last = list.erase( std::next(list.begin(),list.size()-1 ) );
-    //     EXPECT_EQ( list , ( which_lib::list<int>{ 1, 2, 3, 4 } ) );
-    //     EXPECT_EQ( list.end() , past_last );
-    //     EXPECT_EQ( list.size() , 4 );
-    // }
+        // removing a single element at the end.
+        list = { 1, 2, 3, 4, 5 };
+        past_last = list.erase( std::next(list.begin(),list.size()-1 ) );
+        EXPECT_EQ( list , ( which_lib::list<int>{ 1, 2, 3, 4 } ) );
+        EXPECT_EQ( list.end() , past_last );
+        EXPECT_EQ( list.size() , 4 );
+    }
 
     {
         BEGIN_TEST(tm, "Reverse","Checking the reverse methos");
