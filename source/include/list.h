@@ -580,7 +580,6 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 m_len--;
             }
 
-            // TODO (thiago): FIX THIS
             void pop_back() {
                 if ( empty() )
                     throw std::out_of_range("pop_back(): cannot use the back method on an empty list."); 
@@ -593,8 +592,7 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
 
             //=== [IV-a] MODIFIERS W/ ITERATORS
             template < class InItr >
-            void assign( InItr first, InItr last )
-            { 
+            void assign( InItr first, InItr last ) { 
                 clear();
                 m_len = 0;
                 while(first != last) {
@@ -604,10 +602,9 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 }
             }
 
-            void assign( std::initializer_list<T> ilist )
-            { 
+            void assign( std::initializer_list<T> ilist ) { 
                 *this = ilist;
-             }
+            }
 
             /*!
              *  Inserts a new value in the list before the iterator 'it'
@@ -642,8 +639,8 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             template < typename InItr >
             iterator insert( iterator pos, InItr first, InItr last ) { 
                 // Go trough range in reverse order and insert always at the same position
-                for (auto it {last}; it != first; it--)
-                    pos = insert(pos, *std::prev(it));
+                for (auto it {first}; it != last; it++)
+                    insert(pos, *it);
                 return pos;
             }
 
