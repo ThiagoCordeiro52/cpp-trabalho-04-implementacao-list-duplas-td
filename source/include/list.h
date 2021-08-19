@@ -759,31 +759,41 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 if (m_len <= 1)
                     return;
                 
-                auto oldLast {m_tail->prev};
-                auto oldSize {m_len};
+                auto old_last {m_tail->prev}; // to avoid losing reference to it
+                auto old_size {m_len};
                 auto mid{m_len / 2};
                 auto it = std::next(begin(), mid);
 
+                // Changes the logical end of the list to be before the value of it
                 it.m_ptr->prev->next = m_tail;
                 m_tail->prev = it.m_ptr->prev;
                 m_len = mid;
 
+                // Move the values of the list to an auxiliary list
+                // Because we changed the logical end, list1 will only contain the values of range [begin(), it)
                 list list1 {};
-                list1.splice(list1.cbegin(),*this);
+                list1.splice(list1.cbegin(), *this);
 
+                // Changes the logical begin of the list to be the value of it
                 m_head->next = it.m_ptr;
                 it.m_ptr->prev = m_head;
-                m_tail->prev = oldLast;
-                m_len = oldSize - mid;
 
+                // Changes the logical end of the list to be the actual end
+                m_tail->prev = old_last;
+                m_len = old_size - mid;
+
+                // Move the values of the list to an auxiliary list
+                // Because we changed the logical start and end, list2 will only contain the values of range [it, end())
                 list list2{};
                 list2.splice(list2.cbegin(), *this);
 
+                // Sorts the two halfs of the list, there are stored on list1 and list2
                 list1.sort();
                 list2.sort();
 
                 list1.merge(list2);
 
+                // moves the values back to this list
                 splice(cbegin(), list1);
             }
     };
