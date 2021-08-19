@@ -453,32 +453,32 @@ int main( void )
     }
 
 
-    {
-        BEGIN_TEST(tm, "InsertInitializarList","InsertInitializarList");
-        // Aux arrays.
-        which_lib::list<int> list1 { 1, 2, 3, 4, 5 };
-        which_lib::list<int> list2 { 1, 2, 3, 4, 5 };
-        which_lib::list<int> source { 6, 7, 8, 9, 10 };
+    // {
+    //     BEGIN_TEST(tm, "InsertInitializarList","InsertInitializarList");
+    //     // Aux arrays.
+    //     which_lib::list<int> list1 { 1, 2, 3, 4, 5 };
+    //     which_lib::list<int> list2 { 1, 2, 3, 4, 5 };
+    //     which_lib::list<int> source { 6, 7, 8, 9, 10 };
 
-        // Inset at the beginning.
-        list1.insert( list1.begin(), { 6, 7, 8, 9, 10 } );
-        EXPECT_EQ( list1 , ( which_lib::list<int>{ 6, 7, 8, 9, 10, 1, 2, 3, 4, 5 } ) );
+    //     // Inset at the beginning.
+    //     list1.insert( list1.begin(), { 6, 7, 8, 9, 10 } );
+    //     EXPECT_EQ( list1 , ( which_lib::list<int>{ 6, 7, 8, 9, 10, 1, 2, 3, 4, 5 } ) );
 
-        // In the middle
-        list1 = list2;
-        list1.insert( std::next( list1.begin(), 2 ), { 6, 7, 8, 9, 10 } );
-        EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 6, 7, 8, 9, 10, 3, 4, 5 } ) );
+    //     // In the middle
+    //     list1 = list2;
+    //     list1.insert( std::next( list1.begin(), 2 ), { 6, 7, 8, 9, 10 } );
+    //     EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 6, 7, 8, 9, 10, 3, 4, 5 } ) );
 
-        // At the end
-        list1 = list2;
-        list1.insert( list1.end(), { 6, 7, 8, 9, 10 } );
-        EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } ) );
+    //     // At the end
+    //     list1 = list2;
+    //     list1.insert( list1.end(), { 6, 7, 8, 9, 10 } );
+    //     EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } ) );
 
-        // // Outside
-        // list1 = list2;
-        // list1.insert( std::next( list1.end(), 2 ) , { 6, 7, 8, 9, 10 } );
-        // EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5 } ) );
-    }
+    //     // // Outside
+    //     // list1 = list2;
+    //     // list1.insert( std::next( list1.end(), 2 ) , { 6, 7, 8, 9, 10 } );
+    //     // EXPECT_EQ( list1 , ( which_lib::list<int>{ 1, 2, 3, 4, 5 } ) );
+    // }
 
 
     // // // {

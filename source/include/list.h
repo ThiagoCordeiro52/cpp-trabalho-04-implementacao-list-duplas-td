@@ -361,6 +361,8 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                     curr->prev = prev;
                     prev = curr;
                 }
+                m_tail->prev = prev;
+                prev->next = m_tail;
             }
 
             template< typename InputIt >
@@ -415,7 +417,15 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             }
 
             ~list() { 
-                clear(); 
+                // clear(); 
+                // delete m_head;
+                // delete m_tail;
+                auto L = m_head->next;
+                while (L != m_tail) {
+                    auto target = L;
+                    L = L->next;
+                    delete target;
+                }
                 delete m_head;
                 delete m_tail;
              }
@@ -502,6 +512,8 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
              * @brief erases the values of the entire list
              */
             void clear()  { 
+                //   while( not empty() )
+                //     pop_front();
                 auto L = m_head->next;
                 while (L != m_tail) {
                     auto target = L;
