@@ -422,11 +422,10 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 delete m_tail;
              }
 
-            // TODO (davi): maybe change to use erase insted of first while
             list & operator=( const list & rhs ) {
                 // Ensure the size this lsit is not greater than the other, liberating memory if necessary
-                while (m_len > rhs.m_len)
-                    pop_back();
+                if (m_len > rhs.m_len)
+                    erase(std::next(begin(), rhs.m_len), end());
 
                 // Puts all the values this values this list can hold right now
                 auto last {std::next(rhs.cbegin(), m_len)};
@@ -441,8 +440,8 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
 
             list & operator=( std::initializer_list<T> ilist ) {  
                 // Ensure the size this lsit is not greater than the other, liberating memory if necessary
-                while (m_len > ilist.size())
-                    pop_back();
+                if (m_len > ilist.size())
+                    erase(std::next(begin(), ilist.size()), end());
 
                 // Puts all the values this values this list can hold right now
                 auto last {std::next(ilist.begin(), m_len)};
@@ -504,17 +503,7 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
              * @brief erases the values of the entire list
              */
             void clear()  { 
-                //   while( not empty() )
-                //     pop_front();
-                auto L = m_head->next;
-                while (L != m_tail) {
-                    auto target = L;
-                    L = L->next;
-                    delete target;
-                }
-                m_head->next = m_tail;
-                m_tail->prev = m_head;
-                m_len = 0;
+                erase(begin(), end());
             }
 
             /**
@@ -577,33 +566,21 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 if ( empty() )
                     throw std::out_of_range("pop_front(): cannot use the front method on an empty list.");
 
-                auto L {m_head->next};
-                m_head->next = m_head->next->next;
-                m_head->next->prev = m_head;
-                delete L;
-                m_len--;
+                erase(begin());
             }
 
             void pop_back() {
                 if ( empty() )
                     throw std::out_of_range("pop_back(): cannot use the back method on an empty list."); 
-                auto L {m_tail->prev};
-                m_tail->prev = m_tail->prev->prev;
-                m_tail->prev->next = m_tail;
-                delete L;
-                m_len--;
+
+                erase(std::prev(end()));
             }
 
             //=== [IV-a] MODIFIERS W/ ITERATORS
             template < class InItr >
             void assign( InItr first, InItr last ) { 
                 clear();
-                m_len = 0;
-                while(first != last) {
-                    push_back(*first);
-                    first++;
-                    m_len++;
-                }
+                insert(begin(), first, last);
             }
 
             void assign( std::initializer_list<T> ilist ) { 
@@ -642,56 +619,54 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
              */
             template < typename InItr >
             iterator insert( iterator pos, InItr first, InItr last ) { 
-                // Go trough range in reverse order and insert always at the same position
+                // Go trough range and insert always at the same position
                 for (auto it {first}; it != last; it++)
                     insert(pos, *it);
                 return pos;
             }
 
-            iterator insert( iterator cpos, std::initializer_list<T> ilist ) { 
-                for (auto it {ilist.end()}; it != ilist.begin(); it--)
-                    cpos = insert(cpos, *std::prev(it));
-                return cpos;
+            iterator insert( iterator pos, std::initializer_list<T> ilist ) { 
+                for (auto it {ilist.begin()}; it != ilist.end(); it++)
+                    insert(pos, *it);
+                return pos;
             }
 
             /*!
-             *  Erases the node pointed by 'it_' and returns an iterator
+             *  Erases the node pointed by 'it' and returns an iterator
              *  to the node just past the deleted node.
              *
              *  \param it The node we wish to delete.
              *  \return An iterator to the node following the deleted node.
              */
-            iterator erase( iterator it )
-            {
-                auto element{m_head->next};
-                while(element != nullptr) {
-                    std::cout << "\n\nEPA\n\n";
-                    if(it == element) {
-                        element->prev->next = element->next;
-                        delete element;
-                        break;
-                    }
-                    element = element->next;
-                } 
-                return it; 
+            iterator erase( iterator it ) {
+                it.m_ptr->prev->next = it.m_ptr->next;
+                it.m_ptr->next->prev = it.m_ptr->prev;
+
+                m_len--;
+
+                auto to_return {it.m_ptr->next};
+
+                delete it.m_ptr;
+
+                return iterator{to_return};
             }
 
             // Erase items from [start; end) and return a iterator just past the deleted node.
-            iterator erase( iterator start, iterator end )
-            { 
-                auto element {start};
-                while(start != end) {
-                    erase(start);
-                    start++;
+            iterator erase( iterator start, iterator end ) { 
+                start.m_ptr->prev->next = end.m_ptr;
+                end.m_ptr->prev = start.m_ptr->prev;
+
+                m_len -= std::distance(start, end);
+
+                auto it {start};
+                while (it != end) {
+                    auto new_it = std::next(it);
+                    delete it.m_ptr;
+                    it = new_it;
                 }
-                return element;
+                    
+                return it;
             }
-
-            const_iterator find( const T & value_ ) const
-            { /* TODO */ return const_iterator{}; }
-
-            iterator find( const T & value_ )
-            { /* TODO */ return iterator{}; }
 
             //=== [V] UTILITY METHODS
             /**
@@ -765,8 +740,8 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             void unique( void ){ 
                 auto first {m_head->next};
                 auto last {m_head->next->next};
-                while(last != nullptr) {
-                    if(first->data == last->data) {
+                while (first != m_tail) {
+                    if (first->data == last->data) {
                         auto target = last;
                         last = last->next;
                         first->next = last;
@@ -779,7 +754,9 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 }
             }
 
-            void sort( void ){ return; }
+            void sort( void ) { 
+                merge_sort(begin(), end());
+            }
     };
 
     //=== [VI] OPETARORS
