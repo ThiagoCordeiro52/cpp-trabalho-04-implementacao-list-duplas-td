@@ -417,15 +417,7 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
             }
 
             ~list() { 
-                // clear(); 
-                // delete m_head;
-                // delete m_tail;
-                auto L = m_head->next;
-                while (L != m_tail) {
-                    auto target = L;
-                    L = L->next;
-                    delete target;
-                }
+                clear(); 
                 delete m_head;
                 delete m_tail;
              }
