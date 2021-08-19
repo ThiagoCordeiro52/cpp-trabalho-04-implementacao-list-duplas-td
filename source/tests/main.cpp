@@ -24,6 +24,21 @@ std::ostream & operator<<( std::ostream &os, const which_lib::list<T> & L )
     return os;
 }
 
+        struct Card{
+            int value; std::string face;
+            // Default comparator for Card type.
+            inline bool operator<( const Card &a ) const
+            { return value < a.value; }
+            inline bool operator==( const Card &a ) const
+            { return value == a.value; }
+            inline bool operator!=( const Card &a ) const
+            { return value != a.value; }
+        };
+            std::ostream & operator<<( std::ostream &os, const Card & card ) { 
+                os << "{ " << card.value << ", " << card.face << " }";
+                return os;
+            };
+
 int main( void )
 {
     //=== TESTING BASIC OPERATIONS METHODS
@@ -974,93 +989,99 @@ int main( void )
         EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
     }
 
-    // {
-    //     BEGIN_TEST(tm3, "Sort 1", "sorting a regular list.");
-    //     which_lib::list<int> list_a{ 4, 2, 1, 5, 3 };              // List B
-    //     which_lib::list<int> list_r{ 1, 2, 3, 4, 5 }; // List Result
+    {
+        BEGIN_TEST(tm3, "Sort 1", "sorting a regular list.");
+        which_lib::list<int> list_a{ 4, 2, 1, 5, 3 };              // List B
+        which_lib::list<int> list_r{ 1, 2, 3, 4, 5 }; // List Result
 
-    //     list_a.sort();
-    //     auto add_first{ list_a.begin() };
-    //     auto add_last{ std::prev( list_a.end() ) };
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     // Make sure no new node has been created.
-    //     *add_first = 10; // Iterators must remain valid.
-    //     *add_last = 50;
-    //     which_lib::list<int> list_r2{ 10, 2, 3, 4, 50 }; // List Result
-    //     EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Sort 2", "sorting an already sorted list.");
-    //     which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
-    //     which_lib::list<int> list_r{ 1, 2, 3, 4, 5 }; // List Result
+        list_a.sort();
+        auto add_first{ list_a.begin() };
+        auto add_last{ std::prev( list_a.end() ) };
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        // Make sure no new node has been created.
+        *add_first = 10; // Iterators must remain valid.
+        *add_last = 50;
+        which_lib::list<int> list_r2{ 10, 2, 3, 4, 50 }; // List Result
+        EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
+    }
+    {
+        BEGIN_TEST(tm3, "Sort 2", "sorting an already sorted list.");
+        which_lib::list<int> list_a{ 1, 2, 3, 4, 5 };              // List B
+        which_lib::list<int> list_r{ 1, 2, 3, 4, 5 }; // List Result
 
-    //     list_a.sort();
-    //     auto add_first{ list_a.begin() };
-    //     auto add_last{ std::prev( list_a.end() ) };
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     // Make sure no new node has been created.
-    //     *add_first = 10; // Iterators must remain valid.
-    //     *add_last = 50;
-    //     which_lib::list<int> list_r2{ 10, 2, 3, 4, 50 }; // List Result
-    //     EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Sort 3", "sorting an empty list.");
-    //     which_lib::list<int> list_a{  };              // List B
-    //     which_lib::list<int> list_r{  }; // List Result
+        list_a.sort();
+        auto add_first{ list_a.begin() };
+        auto add_last{ std::prev( list_a.end() ) };
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        // Make sure no new node has been created.
+        *add_first = 10; // Iterators must remain valid.
+        *add_last = 50;
+        which_lib::list<int> list_r2{ 10, 2, 3, 4, 50 }; // List Result
+        EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
+    }
+    {
+        BEGIN_TEST(tm3, "Sort 3", "sorting an empty list.");
+        which_lib::list<int> list_a{  };              // List B
+        which_lib::list<int> list_r{  }; // List Result
 
-    //     list_a.sort();
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    // }
-    // {
-    //     BEGIN_TEST(tm3, "Sort 4", "testing stability of the sorting algorithm.");
-    //     struct Card{
-    //         int value; std::string face;
-    //         // Default comparator for Card type.
-    //         inline bool operator<( const Card &a ) const
-    //         { return value < a.value; }
-    //         inline bool operator==( const Card &a ) const
-    //         { return value == a.value; }
-    //     };
-    //     which_lib::list<Card> list_a{
-    //         { 10, "clubs"},
-    //         { 4, "hearts" },
-    //         { 8, "diamond" },
-    //         { 10, "spades" },
-    //         { 4, "clubs" },
-    //         { 7, "spades" },
-    //         { 8, "clubs" }
-    //     };
-    //     which_lib::list<Card> list_r{
-    //         { 4, "hearts" },
-    //         { 4, "clubs" },
-    //         { 7, "spades" },
-    //         { 8, "diamond" },
-    //         { 8, "clubs" },
-    //         { 10, "clubs"},
-    //         { 10, "spades" },
-    //     };
+        list_a.sort();
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+    }
+    {
+        BEGIN_TEST(tm3, "Sort 4", "testing stability of the sorting algorithm.");
+        // struct Card{
+        //     int value; std::string face;
+        //     // Default comparator for Card type.
+        //     inline bool operator<( const Card &a ) const
+        //     { return value < a.value; }
+        //     inline bool operator==( const Card &a ) const
+        //     { return value == a.value; }
+        //     inline bool operator!=( const Card &a ) const
+        //     { return value != a.value; }
+        // };
+        //     std::ostream & operator<<( std::ostream &os, const Card & card ) { 
+        //         os << "{ " << card.value << ", " << card.face << "\n";
+        //     };
+        which_lib::list<Card> list_a{
+            { 10, "clubs"},
+            { 4, "hearts" },
+            { 8, "diamond" },
+            { 10, "spades" },
+            { 4, "clubs" },
+            { 7, "spades" },
+            { 8, "clubs" }
+        };
+        which_lib::list<Card> list_r{
+            { 4, "hearts" },
+            { 4, "clubs" },
+            { 7, "spades" },
+            { 8, "diamond" },
+            { 8, "clubs" },
+            { 10, "clubs"},
+            { 10, "spades" },
+        };
 
-    //     auto add_first{ list_a.begin() };
-    //     auto add_last{ std::prev( list_a.end() ) };
-    //     list_a.sort();
-    //     EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
-    //     // Make sure no new node has been created.
-    //     *add_first = {100, "CLUBS"}; // Iterators must remain valid.
-    //     *add_last = {80, "CLUBS"};
-    //     which_lib::list<Card> list_r2{
-    //         { 4, "hearts" },
-    //         { 4, "clubs" },
-    //         { 7, "spades" },
-    //         { 8, "diamond" },
-    //         { 80, "CLUBS" },
-    //         { 100, "CLUBS"},
-    //         { 10, "spades" },
-    //     };
-    //     EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
-    // }
+        auto add_first{ list_a.begin() };
+        auto add_last{ std::prev( list_a.end() ) };
+        list_a.sort();
+        std::cout << "OLHA AQUI: " << list_a << "\n";
+        EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
+        // Make sure no new node has been created.
+        *add_first = {100, "CLUBS"}; // Iterators must remain valid.
+        *add_last = {80, "CLUBS"};
+        which_lib::list<Card> list_r2{
+            { 4, "hearts" },
+            { 4, "clubs" },
+            { 7, "spades" },
+            { 8, "diamond" },
+            { 80, "CLUBS" },
+            { 100, "CLUBS"},
+            { 10, "spades" },
+        };
+        EXPECT_EQ( list_r2, list_a ); // List A must be equal to list Result.
+    }
 
-    // std::cout << std::endl;
+    std::cout << std::endl;
     tm3.summary();
 
     return 0;

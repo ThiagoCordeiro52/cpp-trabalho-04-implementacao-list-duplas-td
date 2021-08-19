@@ -754,8 +754,37 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 }
             }
 
-            void sort( void ) { 
-                merge_sort(begin(), end());
+
+            void sort( void ) {
+                if (m_len <= 1)
+                    return;
+                
+                auto oldLast {m_tail->prev};
+                auto oldSize {m_len};
+                auto mid{m_len / 2};
+                auto it = std::next(begin(), mid);
+
+                it.m_ptr->prev->next = m_tail;
+                m_tail->prev = it.m_ptr->prev;
+                m_len = mid;
+
+                list list1 {};
+                list1.splice(list1.cbegin(),*this);
+
+                m_head->next = it.m_ptr;
+                it.m_ptr->prev = m_head;
+                m_tail->prev = oldLast;
+                m_len = oldSize - mid;
+
+                list list2{};
+                list2.splice(list2.cbegin(), *this);
+
+                list1.sort();
+                list2.sort();
+
+                list1.merge(list2);
+
+                splice(cbegin(), list1);
             }
     };
 
