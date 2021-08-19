@@ -647,8 +647,12 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 return pos;
             }
 
-            iterator insert( iterator cpos_, std::initializer_list<T> ilist_ )
-            { /* TODO */ return iterator{}; }
+            iterator insert( iterator cpos, std::initializer_list<T> ilist )
+            { 
+                for (auto it {ilist.end()}; it != ilist.begin(); it--)
+                    cpos = insert(cpos, *std::prev(it));
+                return cpos;
+            }
 
             /*!
              *  Erases the node pointed by 'it_' and returns an iterator
