@@ -546,6 +546,11 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 return m_tail->prev->data;
             }
 
+            /**
+             * @brief Add a value to the begin of the list
+             *
+             * @param value the value to be added
+             */
             void push_front( const T & value ) { 
                 insert(begin(), value);
             }
@@ -569,6 +574,9 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 erase(begin());
             }
 
+            /**
+             * @brief removes the last value of the list
+             */
             void pop_back() {
                 if ( empty() )
                     throw std::out_of_range("pop_back(): cannot use the back method on an empty list."); 
@@ -737,6 +745,9 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 std::swap(m_head, m_tail);
             }
 
+            /**
+             * @brief Remove duplicate values
+             */
             void unique( void ){ 
                 auto first {m_head->next};
                 auto last {m_head->next->next};
@@ -754,7 +765,9 @@ namespace sc { // linear sequence. Better name: sequence container (same as STL)
                 }
             }
 
-
+            /**
+             * @brief Sort elements in container
+             */
             void sort( void ) {
                 if (m_len <= 1)
                     return;
