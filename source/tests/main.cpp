@@ -24,21 +24,6 @@ std::ostream & operator<<( std::ostream &os, const which_lib::list<T> & L )
     return os;
 }
 
-        struct Card{
-            int value; std::string face;
-            // Default comparator for Card type.
-            inline bool operator<( const Card &a ) const
-            { return value < a.value; }
-            inline bool operator==( const Card &a ) const
-            { return value == a.value; }
-            inline bool operator!=( const Card &a ) const
-            { return value != a.value; }
-        };
-            std::ostream & operator<<( std::ostream &os, const Card & card ) { 
-                os << "{ " << card.value << ", " << card.face << " }";
-                return os;
-            };
-
 int main( void )
 {
     //=== TESTING BASIC OPERATIONS METHODS
@@ -1029,19 +1014,16 @@ int main( void )
     }
     {
         BEGIN_TEST(tm3, "Sort 4", "testing stability of the sorting algorithm.");
-        // struct Card{
-        //     int value; std::string face;
-        //     // Default comparator for Card type.
-        //     inline bool operator<( const Card &a ) const
-        //     { return value < a.value; }
-        //     inline bool operator==( const Card &a ) const
-        //     { return value == a.value; }
-        //     inline bool operator!=( const Card &a ) const
-        //     { return value != a.value; }
-        // };
-        //     std::ostream & operator<<( std::ostream &os, const Card & card ) { 
-        //         os << "{ " << card.value << ", " << card.face << "\n";
-        //     };
+        struct Card{
+            int value; std::string face;
+            // Default comparator for Card type.
+            inline bool operator<( const Card &a ) const
+            { return value < a.value; }
+            inline bool operator==( const Card &a ) const
+            { return value == a.value; }
+            inline bool operator!=( const Card &a ) const
+            { return value != a.value; }
+        };
         which_lib::list<Card> list_a{
             { 10, "clubs"},
             { 4, "hearts" },
@@ -1064,7 +1046,6 @@ int main( void )
         auto add_first{ list_a.begin() };
         auto add_last{ std::prev( list_a.end() ) };
         list_a.sort();
-        std::cout << "OLHA AQUI: " << list_a << "\n";
         EXPECT_EQ( list_r, list_a ); // List A must be equal to list Result.
         // Make sure no new node has been created.
         *add_first = {100, "CLUBS"}; // Iterators must remain valid.
